@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A hands-on walkthrough of building a containerized e-commerce MCP server with FastMCP, PostgreSQL, and a Streamlit UI — fully runnable with docker compose." />
+  <title>Building an MCP Server with FastMCP: A Hands-On Demo — Alessandro Garavaglia</title>
+  <link rel="stylesheet" href="../../assets/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
+</head>
+<body class="article-page">
+
+  <nav class="site-nav">
+    <div class="container">
+      <div class="site-nav-inner">
+        <a href="../../" class="site-nav-logo">Alessandro Garavaglia<span class="site-nav-dot"> · </span>Tech Blog</a>
+        <div class="site-nav-links">
+          <a href="https://github.com/agaravaglia" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://medium.com/@ale.garavaglia" target="_blank" rel="noopener">Medium</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="article-header">
+    <div class="container">
+      <a class="back-link" href="../../">← All articles</a>
+      <div class="article-meta">
+        <span class="badge badge-type">Deep Dive</span>
+        <span class="badge badge-difficulty">Intermediate</span>
+        <time>September 09, 2025</time>
+      </div>
+    </div>
+  </header>
+
+  <main class="article-content container">
+    <div class="article-title-block">
+      <h1>Building an MCP Server with FastMCP: A Hands-On Demo</h1>
+      <p class="article-description">A hands-on walkthrough of building a containerized e-commerce MCP server with FastMCP, PostgreSQL, and a Streamlit UI — fully runnable with docker compose.</p>
+    </div>
+    <p><strong>Alessandro Garavaglia</strong> | 8 min read | Sep 9, 2025</p>
+<hr />
+<p>If you've been following the developments around the <strong>Model Context Protocol (MCP)</strong>, you've probably seen people compare it to the <em>USB-C of AI apps</em>. It's a fitting metaphor: MCP standardizes the way language models connect to external capabilities, so instead of bespoke integrations and brittle APIs for each project, you get a single, predictable interface for agents to discover and use whatever you decide to expose.</p>
+<p><img alt="agents-tools" src="additional_files/images/image-02.png" /></p>
+<blockquote>
+<p>When connecting N agents and M tools, it is necessary to design NxM connections to make the tools available to all agents.</p>
+</blockquote>
+<p>The magic here is separation. Instead of wiring your agent directly into your database (and handing over credentials in the process), you delegate that connection to an MCP server.</p>
+<blockquote>
+<p>When connecting N agents and M tools, with an MCP server it is enough to design N+M connections, reducing complexity and creating a decoupling layer.</p>
+</blockquote>
+<p><img alt="agents-mcp-tools" src="additional_files/images/image-03.png" /></p>
+<p>The server holds the secrets, validates requests, and decides exactly what the agent can do, whether that's reading a user record, updating inventory, or triggering a long-running process. The agent simply calls the server's declared capabilities.</p>
+<h3>Three pillars of an MCP server</h3>
+<p>Before we dive into the demo, it's worth taking a minute to understand the three primitives MCP servers can expose.</p>
+<ul>
+<li>
+<p><strong>Tools</strong> are callable actions. You can think of them as remote functions with typed inputs and outputs: "create_user," "update_order," "generate_report."</p>
+</li>
+<li>
+<p><strong>Resources</strong> are read-only data endpoints, like "data://users" or "data://orders/order/{id}." They give clients a stable way to fetch data without exposing raw queries.</p>
+</li>
+<li>
+<p><strong>Prompts</strong> are reusable templates the server can publish for clients, ensuring consistency in style, structure, or instructions across different use cases.</p>
+</li>
+</ul>
+<p>FastMCP, the Python SDK I'm using here, makes these concepts surprisingly straightforward. You annotate a function with a decorator, define its input/output schema with Pydantic, and you're done, no protocol wrangling needed.</p>
+<h3>The demo architecture</h3>
+<p>To make this concrete, I built a small e-commerce example that runs entirely in Docker. Here's the <code>docker-compose.yaml</code>:</p>
+<pre><code class="language-yaml">version: '3.8'
+
+services:
+  postgresdb:
+    image: postgres:16
+    container_name: postgres_db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./data/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./data/postgres_data:/var/lib/postgresql/data
+    ports:
+      - &quot;5432:5432&quot;
+    healthcheck:
+      test: [&quot;CMD-SHELL&quot;, &quot;pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}&quot;]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mcp_server:
+    build:
+      context: ./mcp_server
+    container_name: mcp_server
+    depends_on:
+      postgresdb:
+        condition: service_healthy
+    ports:
+      - &quot;8000:8000&quot;
+    env_file:
+      - .env
+
+  ui:
+    build:
+      context: ./ui
+    container_name: ui_chatbot
+    depends_on:
+      - mcp_server
+    ports:
+      - &quot;8501:8501&quot;
+    env_file:
+      - .env
+
+volumes:
+  postgres_data:
+</code></pre>
+<p>This docker-compose file handles the creation of the three services we need for the demo:</p>
+<ul>
+<li>
+<p>The database (<code>postgresdb</code>) holds the users, products, and orders. An <code>init.sql</code> file will manage the initialization of the data within the database.</p>
+</li>
+<li>
+<p>The MCP server (<code>mcp_server</code>) is the only service that talks directly to it.</p>
+</li>
+<li>
+<p>Finally, the UI service (<code>ui</code>) acts as the agent's front-end, talking to the MCP server and providing an interactive UI.</p>
+</li>
+</ul>
+<p>This is an important design choice that lies at the <strong>core of MCP servers</strong>: the agent never touches the database directly. No embedded SQL, no leaked credentials, no risk of an LLM deciding to drop tables because it misunderstood a prompt.</p>
+<h3>Peeking into the code</h3>
+<h4>The entry point</h4>
+<p>The entry point, <code>mcp_server/main.py</code>, just wires together the different domain servers, one for users, one for products, one for orders:</p>
+<pre><code class="language-python">from fastmcp import FastMCP
+
+from servers.users.server import user_server
+from servers.products.server import product_server
+from servers.orders.server import order_server
+
+## Initialize the main MCP application
+mcp_server = FastMCP(&quot;Ecommerce&quot;)
+
+## Mount the individual servers with their respective prefixes
+mcp_server.mount(user_server, prefix=&quot;users&quot;)
+mcp_server.mount(product_server, prefix=&quot;products&quot;)
+mcp_server.mount(order_server, prefix=&quot;orders&quot;)
+
+if __name__ == &quot;__main__&quot;:
+    mcp_server.run(
+        transport=&quot;http&quot;,
+        host=&quot;0.0.0.0&quot;,
+        port=8000,
+        log_level=&quot;debug&quot;,
+    )
+</code></pre>
+<p>That's all it takes to assemble a multi-domain MCP server: each sub-server is self-contained, with its own tools, resources, and (if needed) prompts. You can add a new domain with a single mount call.</p>
+<h4>The Users server</h4>
+<p>Here's what server for the users looks like (keep in mind that orders and products servers have similar structure and functionalities):</p>
+<pre><code class="language-python">from typing import Any
+from fastmcp import FastMCP
+from backend import handle_errors
+from servers.users.helpers import (
+    NewUserInfo,
+    UserUpdateInfo,
+    _fetch_users,
+    _fetch_user_by_id,
+    _add_new_user,
+    _modify_user
+)
+
+## Define the server for user-related operations
+user_server = FastMCP(&quot;Users&quot;)
+
+## --- MCP Resources (Exposing the Table via GET) ---
+
+@user_server.resource(&quot;data://users&quot;)
+@handle_errors
+def get_all_users() -&gt; list[dict[str, Any]]:
+    &quot;&quot;&quot;
+    Exposes the entire users table.
+
+    Returns:
+        A list of dictionaries representing all users with full details.
+    &quot;&quot;&quot;
+    return _fetch_users(brief=False)
+
+@user_server.resource(&quot;data://users/user/{user_id}&quot;)
+@handle_errors
+def get_user_by_id(user_id: str) -&gt; dict[str, Any]:
+    &quot;&quot;&quot;
+    Exposes a single user record from the users table.
+
+    Args:
+        user_id: The ID of the user to retrieve.
+
+    Returns:
+        A dictionary representing the user, or a failure message if not found.
+    &quot;&quot;&quot;
+    user = _fetch_user_by_id(user_id)
+    if not user:
+        return {&quot;status&quot;: &quot;failure&quot;, &quot;message&quot;: f&quot;User with ID '{user_id}' not found.&quot;}
+    return user
+
+## --- MCP Tools (to be used by an agent) ---
+
+@user_server.tool
+@handle_errors
+def add_new_user(user_info: NewUserInfo) -&gt; dict[str, Any]:
+    &quot;&quot;&quot;
+    Adds a new user with the provided information.
+
+    Args:
+        user_info: A model containing the new user's name, email, and optional fields.
+
+    Returns:
+        A dictionary with the new user's ID and a success status.
+    &quot;&quot;&quot;
+    return _add_new_user(user_info)
+
+@user_server.tool
+@handle_errors
+def modify_user_info(user_id: str, updates: UserUpdateInfo) -&gt; dict[str, Any]:
+    &quot;&quot;&quot;
+    Updates one or more details for an existing user.
+
+    Args:
+        user_id: The ID of the user to modify.
+        updates: A model with the fields to update. Only non-null fields will be updated.
+
+    Returns:
+        A dictionary confirming the update.
+    &quot;&quot;&quot;
+    return _modify_user(user_id, updates)
+
+@user_server.tool
+@handle_errors
+def get_user_data(
+    data_detail: str
+) -&gt; list[dict[str, Any]] | dict[str, Any]:
+    &quot;&quot;&quot;
+    This is a tool that allows to query the database without calling the specific
+    resource (so far, basic implementation with mcp adapters do not allow to pass parameters).
+
+    data_detail is the URL of the data to query. It has to be of the format:
+    - data://users/user/{user_id}: for a specific user given its id
+    - data://users: all the users
+
+    Args:
+        data_detail: the data to retrieve
+
+    Returns:
+        A list of dictionaries representing the data.
+    &quot;&quot;&quot;
+    if data_detail.startswith(&quot;data://users/user/&quot;):
+        user_id = data_detail.split(&quot;/&quot;)[-1]
+        return _fetch_user_by_id(user_id)
+    elif data_detail == &quot;data://users&quot;:
+        return _fetch_users()
+    else:
+        return {
+            &quot;status&quot;: &quot;failure&quot;,
+            &quot;message&quot;: f&quot;Invalid data detail: {data_detail}. Please use a valid format.&quot;
+        }
+</code></pre>
+<p>FastMCP provides out-of-the-box decorators to declare tools, resources and prompts, making very easy to build the MCP server. For example, it automatically handles the conversion of the docstring of the Python function into the description of the tool visible to the AI agents.</p>
+<p>In just a few lines, we've exposed two resources for reading user data, and three tools for creating and updating it. Pydantic models (<code>NewUserInfo</code>, <code>UserUpdateInfo</code>) handle validation automatically, and the <code>@handle_errors</code> decorator ensures consistent error messages.</p>
+<pre><code class="language-python">import uuid
+from pydantic import BaseModel, Field
+from backend import db_connector, parse_output
+
+## --- Pydantic Models for Data Validation ---
+
+class NewUserInfo(BaseModel):
+    name: str = Field(description=&quot;Full name of the user.&quot;)
+    email: str = Field(description=&quot;Unique email address of the user.&quot;)
+    phone_number: str | None = Field(None, description=&quot;Phone number of the user.&quot;)
+    shipping_address: str | None = Field(None, description=&quot;Shipping address for the user.&quot;)
+
+class UserUpdateInfo(BaseModel):
+    name: str | None = Field(None, description=&quot;New full name of the user.&quot;)
+    email: str | None = Field(None, description=&quot;New email address of the user.&quot;)
+    phone_number: str | None = Field(None, description=&quot;New phone number of the user.&quot;)
+    shipping_address: str | None = Field(None, description=&quot;New shipping address.&quot;)
+
+## --- Internal Database Logic ---
+
+@db_connector
+def _fetch_users(cur, brief: bool = False):
+    &quot;&quot;&quot;
+    Fetches user data from the database.
+    &quot;&quot;&quot;
+    query = &quot;SELECT user_id, name FROM users;&quot; if brief else &quot;SELECT * FROM users;&quot;
+    cur.execute(query)
+    return parse_output(cur)
+
+@db_connector
+def _fetch_user_by_id(cur, user_id: str):
+    &quot;&quot;&quot;
+    Fetches a single user by their ID.
+    &quot;&quot;&quot;
+    cur.execute(&quot;SELECT * FROM users WHERE user_id = %s;&quot;, (user_id,))
+    return parse_output(cur, one=True)
+
+@db_connector
+def _add_new_user(cur, user_info: NewUserInfo):
+    &quot;&quot;&quot;
+    Adds a new user to the database.
+    &quot;&quot;&quot;
+    user_id = f&quot;usr_{str(uuid.uuid4())[:8]}&quot;
+    cur.execute(
+        &quot;&quot;&quot;
+        INSERT INTO users (user_id, name, email, phone_number, shipping_address)
+        VALUES (%s, %s, %s, %s, %s) RETURNING user_id;
+        &quot;&quot;&quot;,
+        (user_id, user_info.name, user_info.email, user_info.phone_number, user_info.shipping_address)
+    )
+    return {
+        &quot;user_id&quot;: cur.fetchone()[0],
+        &quot;status&quot;: &quot;success&quot;
+    }
+
+@db_connector
+def _modify_user(cur, user_id: str, user_data: UserUpdateInfo):
+    &quot;&quot;&quot;
+    Updates an existing user's data.
+    &quot;&quot;&quot;
+    update_fields = {k: v for k, v in user_data.model_dump().items() if v is not None}
+    if not update_fields:
+        raise ValueError(&quot;No fields provided to update.&quot;)
+
+    set_clause = &quot;, &quot;.join([f&quot;{key} = %s&quot; for key in update_fields.keys()])
+    values = list(update_fields.values()) + [user_id]
+    query = f&quot;UPDATE users SET {set_clause} WHERE user_id = %s;&quot;
+    cur.execute(query, tuple(values))
+
+    if cur.rowcount == 0:
+        return {&quot;status&quot;: &quot;failure&quot;, &quot;message&quot;: f&quot;User with ID '{user_id}' not found.&quot;}
+    return {
+        &quot;user_id&quot;: user_id,
+        &quot;status&quot;: &quot;success&quot;,
+        &quot;updated_fields&quot;: list(update_fields.keys())
+    }
+</code></pre>
+<p>There is a separation between what is exposed to the agent in terms of tool (for example <code>get_user_data</code>) and the internal <code>_fetch_users</code> function. The agent doesn't care <em>how</em> <code>_fetch_users</code> gets its data (in this case it's a PostgreSQL query) but it could just as easily be a REST call or a spreadsheet read.</p>
+<p><em>Note: the <code>@db_connector</code> decorator manages the creation of the connection to the PostgreSQL database with the psycopg2 package.</em></p>
+<h3>The server in action</h3>
+<p>The streamlit UI allows to interact directly with the agent, that is built using LangChain, where the chosen LLM is Gemini 2.5 Flash (it is free).</p>
+<p>As you can see, you can make requests via the Chat and the Bot was actually able to answer using the data contained in the PostgreSQL database and act on it.</p>
+<h4>Simple Q&amp;A</h4>
+<p>When asked to show the registered user, the agent correctly invoked the <code>get_user_data</code> tool to reply me with the content of the users table.</p>
+<p><img alt="Demo — chat UI showing the agent's response to a query about registered users" src="additional_files/images/image-04.png" /></p>
+<h4>Update a user's info</h4>
+<p>Another request was to update Tony Stark's address.</p>
+<p><img alt="Demo — confirmation of the successful update in the database" src="additional_files/images/image-05.png" /></p>
+<p>The agent correctly modified the record in the database, by using the dedicated tool provided by the MCP server.</p>
+<blockquote>
+<p><em>In this case, the agent was not only able to read data, but through the tool it was able to act on a system.</em></p>
+</blockquote>
+<p>Here in the demo, we implemented the logic of "updating a user's info" as modifying a record in the PostgreSQL database, but it can be replaced with any operation (for example, triggering an internal API for the correct process execution).</p>
+<h3>Remarks</h3>
+<p>Because this is a <strong>demo</strong>, a few corners have been cut in the interest of clarity and time:</p>
+<ul>
+<li>
+<p>For some operations, I defined both a tool and a resource for fetching data, even though in a "real" implementation you might call the resource directly. To make that distinction work in an agent workflow, I'd have to explicitly build the execution graph using LangGraph, because the resources cannot be imported directly as the tools;</p>
+</li>
+<li>
+<p>The demo uses Gemini 2.5 Flash as the model backend. At the time of writing, this forced me to re-initialize the agent class after every interaction (this is a known issue on Github), and it works because I am managing the memory of agent manually as a list of messages;</p>
+</li>
+<li>
+<p>I didn't implement any prompts. For this use case, the interactions were simple enough that I didn't need prompt standardization, but in a larger or more complex project, prompts are an invaluable way to ensure consistency across tools.</p>
+</li>
+</ul>
+<p>These choices keep the example accessible, but if you're planning to take MCP into production, you'll want to revisit them.</p>
+<h3>Code repository</h3>
+<p>I wrote the code for this demo using Gemini 2.5 Pro as AI coding assistant. If you want to give a look at the demo and run it yourself, the solution is containerized and deployable via docker-compose. You can find it here on Github:</p>
+<p><strong>https://github.com/agaravaglia/fastmcp-ecommerce-demo</strong></p>
+<hr />
+<p><em>This post is not meant to provide definitive answers or prescriptive guidance. Its goal is to spark reflections and discussions on the topic.</em></p>
+<p><em>The views expressed are my own.</em></p>
+<hr />
+<p><strong>Tags:</strong> Agentic AI, AI, MCP Server, AI Agent, Digital Transformation</p>
+  </main>
+
+  <footer class="article-footer">
+    <div class="container">
+      <div class="article-footer-inner">
+        <div class="article-footer-tags">
+          <span class="label">Tags</span>
+          <span class="tag-static">AI</span> <span class="tag-static">MCP</span> <span class="tag-static">Python</span> <span class="tag-static">AI Agent</span>
+        </div>
+        <a class="back-link" href="../../">← All articles</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+</body>
+</html>

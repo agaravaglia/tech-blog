@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Applying the agents governance framework in legacy-heavy, regulated enterprises where compliance drives every decision and tech stacks are fragmented." />
+  <title>Brainstorming about AI agents governance (Part 3/3): The legacy-heavy, regulated enterprise — Alessandro Garavaglia</title>
+  <link rel="stylesheet" href="../../assets/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
+</head>
+<body class="article-page">
+
+  <nav class="site-nav">
+    <div class="container">
+      <div class="site-nav-inner">
+        <a href="../../" class="site-nav-logo">Alessandro Garavaglia<span class="site-nav-dot"> · </span>Tech Blog</a>
+        <div class="site-nav-links">
+          <a href="https://github.com/agaravaglia" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://medium.com/@ale.garavaglia" target="_blank" rel="noopener">Medium</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="article-header">
+    <div class="container">
+      <a class="back-link" href="../../">← All articles</a>
+      <div class="article-meta">
+        <span class="badge badge-type">Framework</span>
+        <span class="badge badge-difficulty">Intermediate</span>
+        <time>October 29, 2025</time>
+      </div>
+    </div>
+  </header>
+
+  <main class="article-content container">
+    <div class="article-title-block">
+      <h1>Brainstorming about AI agents governance (Part 3/3): The legacy-heavy, regulated enterprise</h1>
+      <p class="article-description">Applying the agents governance framework in legacy-heavy, regulated enterprises where compliance drives every decision and tech stacks are fragmented.</p>
+    </div>
+    <p><strong>Alessandro Garavaglia</strong> | 6 min read | Oct 29, 2025</p>
+<hr />
+<p>In Part 1, I introduced a governance framework for AI agents based on three key pillars (Governance, Execution, and Supervision), spanning Strategy, Operations, and Technology. The framework is designed to provide structured guidance regardless of technological maturity.</p>
+<p>In Part 2, I explored how this framework adapts in digital-native enterprises, i.e., organizations with modern infrastructure, unified data platforms, and developer-first cultures.</p>
+<p>This post flips the scenario. Here, we look at how to apply the same principles in <strong>legacy-heavy, highly regulated enterprises</strong>, the kinds of organizations where data is siloed, tech stacks are fragmented, and compliance drives every decision.</p>
+<h3>The legacy-heavy context: complex, cautious, and compliance-driven</h3>
+<p>In contrast with digital-native enterprises, which are centered around data and cloud technologies, large decades-old enterprises often operate in <strong>non-digital markets and have a complex and layered organization</strong>, including within the IT department.</p>
+<p>These organizations typically operate with:</p>
+<ul>
+<li><strong>Multiple generations of technology</strong>: mainframes, batch systems, cloud, and everything in between;</li>
+<li><strong>Strict regulatory requirements</strong> (e.g., banking, healthcare, government);</li>
+<li><strong>Fragmented data and security ownership</strong> across business units;</li>
+<li>Change processes that require <strong>heavy approvals</strong> and documentation;</li>
+<li><strong>Central IT governance and long procurement cycles</strong> for new tools.</li>
+</ul>
+<p>This landscape makes the adoption of AI agents slower and more cautious, but also more critical to get right. Let's walk through how the three pillars adapt in this context.</p>
+<p><img alt="Governance framework adapted for legacy, regulated enterprises" src="additional_files/images/image-01.png" /></p>
+<h3>Governance</h3>
+<p>In legacy-heavy orgs, governance must come first. That doesn't mean stifling innovation, it means clearly defining the sandbox for AI agents to operate within.</p>
+<h4>Agent manifests as formal records</h4>
+<p>Unlike in digital-native orgs, here agent manifests may be:</p>
+<ul>
+<li><strong>Authored mostly via UI-based tools</strong> rather than embedded in code;</li>
+<li><strong>Reviewed and signed off by multiple stakeholders</strong> (IT, Legal, Risk);</li>
+<li>Stored in <strong>central compliance repositories</strong> or document systems.</li>
+</ul>
+<p>The same fields apply (purpose, scope, permissions, risk, ownership), but the process is less automated and more formalized.</p>
+<h4>Manual approval workflows</h4>
+<p>No surprise: Git-based automation is limited here (at first, mostly will be limited to deployment, after the approval). Instead, the agent registration process may look more like:</p>
+<ul>
+<li><strong>Submission through a workflow system</strong> (ServiceNow, Jira, internal UI for Agent exploration);</li>
+<li><strong>Review by the AI Governance Board</strong> or a risk management group;</li>
+<li><strong>Periodic re-certification</strong> of agents after deployment.</li>
+</ul>
+<p>Over time, some partial automation can be introduced via policy-as-code, but manual review is the norm, especially for agents touching sensitive data or critical systems.</p>
+<p>Many regulated enterprises already have well-established committees for data governance, change control, or information security. Rather than creating new ones, <strong>plug AI agent governance into existing frameworks</strong>. Make it a new "class" of asset that existing bodies can track and approve.</p>
+<h4>Ethics, bias, and AI responsibility</h4>
+<p>In highly regulated contexts, ethical compliance and bias mitigation are non-negotiable. The AI Governance Board should:</p>
+<ul>
+<li>Evaluate agents for potential <strong>biases in prompts, access rights, or training data</strong>;</li>
+<li>Mandate <strong>fairness audits before agent deployment</strong> in customer-facing or decision-critical roles;</li>
+<li>Ensure agents comply with <strong>ethical standards aligned with the organization's values and legal obligations</strong>;</li>
+<li>Establish rules against deploying agents in high-risk scenarios <strong>without human-in-the-loop supervision</strong>.</li>
+</ul>
+<h4>AI Governance Board composition</h4>
+<p>Given the complexity of legacy enterprises, the board should be interdisciplinary. It could include:</p>
+<ul>
+<li>Representatives from <strong>IT, Legal, Risk &amp; Compliance, Data Governance, and HR</strong>;</li>
+<li><strong>Business unit stakeholders</strong> for domain-specific oversight;</li>
+<li><strong>External advisors</strong> for ethical, legal, or industry-specific expertise.</li>
+</ul>
+<p>Including a mix of centralized and decentralized voices helps balance control and adoption across departments.</p>
+<h3>Execution</h3>
+<p>In these organizations, you don't build a fancy new Agent PaaS from scratch. You extend existing systems and introduce guardrails gradually. Let's assume, though, that there are at least some minimum requirements to work with:</p>
+<ul>
+<li>A <strong>public cloud provider environment</strong> (GCP, AWS, Azure);</li>
+<li>A <strong>CI/CD stack</strong> able to execute pipelines triggered by Git actions;</li>
+<li>Ability to <strong>run custom containers</strong> (in any form, not necessarily Kubernetes).</li>
+</ul>
+<h4>Managed Agent Gateway</h4>
+<p>In general, since internal infrastructure is fragmented, the first agents to be deployed will often be solutions embedded within third-party SaaS platforms. The key point is to maintain governance from the start while designing to manage multiple use cases.</p>
+<p>A practical entry point is to deploy a centralized "Agent Gateway" that:</p>
+<ul>
+<li><strong>Accepts validated agent manifests</strong> (in code form);</li>
+<li><strong>Routes traffic to the appropriate runtime</strong> (internal API, legacy system, external SaaS platform);</li>
+<li><strong>Handles the deployment of the agent</strong> (launch container, API call, etc.) through CI/CD.</li>
+</ul>
+<p>This can act as a control point without requiring full re-architecture of backend systems. The central UI for agent exploration becomes particularly relevant here, serving as the centralization point for all agent requests.</p>
+<h4>Hybrid deployment strategies</h4>
+<p>Agents won't always run in shiny Kubernetes platforms. Some options include:</p>
+<ul>
+<li>Hosting within <strong>existing enterprise integration platforms</strong>;</li>
+<li><strong>Wrapping agents in scripts</strong> and executing them on legacy systems;</li>
+<li>Leveraging <strong>secure cloud platforms</strong> with clear security and data boundaries (e.g., GCP Model Garden, AWS Bedrock).</li>
+</ul>
+<p>The principle is: <strong>meet the enterprise where it is</strong>. Don't require everything to be best in class from the beginning.</p>
+<h4>Connectors: evolving toward standardization</h4>
+<p>In the early stages, agents in legacy environments often include custom, embedded logic to connect with internal systems. This might mean writing direct API calls to legacy CRMs, file shares, or databases, each agent handling its own access, formatting, and authentication.</p>
+<p><strong>As usage grows, shared internal libraries or proxy APIs can standardize access to key systems</strong> (and over time, MCP-style connectors).</p>
+<p>The key is to start mapping what systems agents touch, identify common patterns, and prioritize which connectors to build first.</p>
+<h3>Supervision</h3>
+<p>In regulated environments, supervision isn't optional. Depending on the market, accountability and tracing requirements may be extensive.</p>
+<h4>Cost control through project budgets</h4>
+<p>FinOps won't be team-level or dynamic here. Instead:</p>
+<ul>
+<li>Agents are tied to <strong>specific cost centers or projects</strong>;</li>
+<li><strong>Budgets are pre-approved</strong>;</li>
+<li>Usage is tracked monthly via <strong>central billing tools</strong>.</li>
+</ul>
+<p>In addition, business leaders must have visibility into how agents support their functions, especially given the <strong>complexity and politics between departments</strong>. Ensuring alignment between spend, impact, and business goals is crucial in hierarchical environments.</p>
+<h4>Risk-based monitoring</h4>
+<p>Each agent must have:</p>
+<ul>
+<li>A defined <strong>"impact tier"</strong> based on business criticality;</li>
+<li>A corresponding <strong>monitoring requirement</strong> (e.g., real-time, daily logs, or weekly audit);</li>
+<li><strong>Defined roles responsible</strong> for reviewing logs and reports.</li>
+</ul>
+<p>For example, an agent generating customer-facing communications may need near-real-time alerting, while an internal assistant preparing reports may only require weekly audits.</p>
+<h4>Legacy observability, extended</h4>
+<p>Plugging into modern observability tools might not be feasible across the board. So:</p>
+<ul>
+<li>Use <strong>existing logging and monitoring platforms</strong> where possible;</li>
+<li><strong>Ingest logs from external platforms</strong> via secure APIs or exports;</li>
+<li>Ensure <strong>audit trails are human-readable</strong> and exportable to internal systems;</li>
+<li>Ensure all <strong>legal auditing requirements for the specific market</strong> are tracked and stored.</li>
+</ul>
+<p>Once all the data is ingested, it is beneficial to build a <strong>processing pipeline to standardize the logs and store them in a central location</strong>, providing coherence across different formats.</p>
+<h3>Best practices and patterns</h3>
+<h4>Best practices:</h4>
+<ul>
+<li><strong>Design governance for auditability</strong>: logs, manifests, decisions, and reviews should be persistently stored and centrally accessible;</li>
+<li><strong>Align with existing governance bodies</strong>: don't create a parallel system;</li>
+<li>Introduce <strong>new tooling only where it fills a clear gap</strong>;</li>
+<li><strong>Define a long-term strategy</strong> to gradually evolve toward a modern AI agent platform.</li>
+</ul>
+<h4>Watchouts:</h4>
+<ul>
+<li>Legacy constraints and too many approval steps can <strong>slow down experimentation</strong> unless there's executive support;</li>
+<li>Teams may try to <strong>bypass controls</strong>, thus visibility must come first;</li>
+<li>Ensure <strong>logs from all environments</strong> (cloud, on-prem, external) are aggregated.</li>
+</ul>
+<h3>Conclusion</h3>
+<p>Legacy-heavy, regulated enterprises can adopt AI agents, but it must be done intentionally, with governance baked in from the start.</p>
+<p>The challenges are real: slow processes, strict rules, and fragmented infrastructure. <strong>But the solution isn't to wait; it's to build bridges and gradually transform the landscape.</strong></p>
+<p>This article is part of a three-post series. If you haven't yet, go back to <strong>Part 1</strong> to learn about the foundational governance framework and to <strong>Part 2</strong> to explore how it applies in digital-native enterprises.</p>
+<p>Thanks for following this series! I hope it's sparked ideas for how to responsibly scale AI agents across very different enterprise contexts.</p>
+<hr />
+<p><em>This post is not meant to provide definitive answers or prescriptive guidance. Its goal is to spark reflections and discussions on the topic.</em></p>
+<p><em>The views expressed are my own.</em></p>
+<hr />
+<p><strong>Tags:</strong> AI, AI Agent, Governance, Digital Transformation</p>
+  </main>
+
+  <footer class="article-footer">
+    <div class="container">
+      <div class="article-footer-inner">
+        <div class="article-footer-tags">
+          <span class="label">Tags</span>
+          <span class="tag-static">AI</span> <span class="tag-static">AI Agent</span> <span class="tag-static">AI Governance</span> <span class="tag-static">Enterprise Technology</span> <span class="tag-static">Digital Transformation</span>
+        </div>
+        <a class="back-link" href="../../">← All articles</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+</body>
+</html>

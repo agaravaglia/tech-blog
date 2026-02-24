@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="How AI agents, AutoML, and off-the-shelf solutions are reshaping what it means to be a data scientist — from model artisan to system architect." />
+  <title>From modeling to orchestration: the Data Scientist's journey in the age of GenAI — Alessandro Garavaglia</title>
+  <link rel="stylesheet" href="../../assets/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
+</head>
+<body class="article-page">
+
+  <nav class="site-nav">
+    <div class="container">
+      <div class="site-nav-inner">
+        <a href="../../" class="site-nav-logo">Alessandro Garavaglia<span class="site-nav-dot"> · </span>Tech Blog</a>
+        <div class="site-nav-links">
+          <a href="https://github.com/agaravaglia" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://medium.com/@ale.garavaglia" target="_blank" rel="noopener">Medium</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="article-header">
+    <div class="container">
+      <a class="back-link" href="../../">← All articles</a>
+      <div class="article-meta">
+        <span class="badge badge-type">Reflection</span>
+        <span class="badge badge-difficulty">Beginner</span>
+        <time>September 17, 2025</time>
+      </div>
+    </div>
+  </header>
+
+  <main class="article-content container">
+    <div class="article-title-block">
+      <h1>From modeling to orchestration: the Data Scientist's journey in the age of GenAI</h1>
+      <p class="article-description">How AI agents, AutoML, and off-the-shelf solutions are reshaping what it means to be a data scientist — from model artisan to system architect.</p>
+    </div>
+    <p><em>How AI agents, AutoML, and off-the-shelf solutions are reshaping what it means to build intelligence, and what skills matter most now.</em></p>
+<p><strong>Alessandro Garavaglia</strong> | 4 min read | Sep 17, 2025</p>
+<hr />
+<p>I have been working in data science for about ten years, and over this decade I've seen our craft change multiple times: from the early days of manual feature engineering and parameters tuning, the establishment of MLOps practices, and now to the rise of large language models (LLMs) and AI agents.</p>
+<p>One shift has become particularly clear to me: <strong>our focus is moving away from building models from scratch and toward orchestrating intelligent systems.</strong></p>
+<h3>The artisan phase of data science</h3>
+<p>For many years, the "core" of data science meant building models by hand. Classification, regression, and forecasting were our bread and butter.</p>
+<p>We spent weeks on feature engineering, hyperparameters tuning, distributions analysis and careful validation. Creating a high-performing model was a kind of scientific craftsmanship, and it was what gave data scientists their identity and prestige.</p>
+<p><img alt="The classic ML development cycle — from data exploration to model monitoring" src="additional_files/images/image-01.webp" /></p>
+<blockquote>
+<p><em>The development process of a classic ML model, from data exploration to monitoring of performances. The development is usually executed as a cycle, iteratively improving all the steps.</em></p>
+</blockquote>
+<h3>The commoditization of modeling</h3>
+<p>That phase didn't last forever. Today, many parts of model building are being commoditized:</p>
+<ul>
+<li><strong>AutoML platforms</strong> can deliver good classification and regression models without heavy manual work;</li>
+<li><strong>Cloud providers</strong> offer forecasting, anomaly detection, and recommendation models as off-the-shelf APIs;</li>
+<li>For most business cases, <strong>"good enough" often beats "state of the art"</strong>.</li>
+</ul>
+<p>Of course, there are still companies, particularly in specialized industries or research-driven organizations, where data scientists work on highly customized and technically complex solutions. These represent though a relatively small fraction of enterprises compared to the broader landscape of data science teams.</p>
+<h3>The LLM revolution and the rise of agents</h3>
+<p>The arrival of LLMs accelerated this shift even further. With LLMs, the real value is no longer in the model itself but in how you orchestrate it:</p>
+<ul>
+<li>Connecting it to data sources;</li>
+<li>Chaining it with external APIs;</li>
+<li>Equipping it with reasoning strategies;</li>
+<li>Embedding it into business workflows.</li>
+</ul>
+<p>We've moved from model training to system design, where the key question is: <strong>how can this model (or set of models) become part of a larger, useful system?</strong></p>
+<p><img alt="Agentic AI development cycle — less linear, more iterative across system components" src="additional_files/images/image-02.png" /></p>
+<blockquote>
+<p><em>In agentic AI development and execution of experimentation is drastically reduced, but development is less linear.</em></p>
+</blockquote>
+<h3>The new wave: click-and-drop workflows</h3>
+<p>On top of LLMs, we're also seeing a rapid rise of drag-and-drop tools for building agents and workflows. They allow anyone to visually stitch together components into something that looks like an intelligent system.</p>
+<p>While this democratization has value, it also comes with risks:</p>
+<ul>
+<li>Solutions that are not versioned;</li>
+<li>Workflows that are hard to trace;</li>
+<li>Fragile systems that no one can maintain.</li>
+</ul>
+<p>This is similar to how software development looked before the advent of version control and modern engineering practices. AI agents will also require the same level of rigor: <strong>reproducibility, monitoring, governance, and collaboration are not optional.</strong></p>
+<h3>New winners in the team hierarchy</h3>
+<p>In this evolving ecosystem, I've noticed how certain roles and skill sets have gained visibility:</p>
+<ul>
+<li>Containerization &amp; deployment;</li>
+<li>API design and management;</li>
+<li>CI/CD pipelines for ML and AI;</li>
+<li>Workflow orchestration and scheduling;</li>
+<li>Solutions and systems architecture.</li>
+</ul>
+<p>These are not traditionally part of the standard data scientist toolbox. They align more with the expertise of MLOps engineers, cloud engineers, and platform specialists.</p>
+<p>At the same time, I sometimes wonder about the role of the "classic" data scientist, the one mostly focused on building bespoke models from scratch. There is a risk that, in this new ecosystem where orchestration and deployment matter more than hand-crafted modeling, such profiles could end up playing a more marginal role.</p>
+<p>I don't see this as inevitable, but it's a reflection worth keeping in mind: unless data scientists adapt to this system-centric landscape, they may find themselves less central than they used to be.</p>
+<h3>What data science still brings to the table</h3>
+<p>That said, there are areas where data science expertise remains irreplaceable:</p>
+<ul>
+<li><strong>Critical evaluation</strong>: knowing when an off-the-shelf solution is enough, and when a custom model is worth the investment.</li>
+<li><strong>Assessment and governance</strong>: designing evaluation frameworks, monitoring drift, testing for bias, and ensuring explainability. These tasks require statistical rigor and domain understanding, and they are unlikely to be fully automated or taken over by infra roles.</li>
+<li><strong>Domain intuition</strong>: the subtle understanding of data context that no agent can replicate.</li>
+</ul>
+<h3>From model artisans to system architects</h3>
+<p>From my point of view, the balance of work in data science has changed dramatically. Less time is spent on building models line by line, and more time is now devoted to integrating APIs, LLMs, and services into robust workflows.</p>
+<p>The skills that are emerging as crucial today are:</p>
+<ul>
+<li>Comfort with cloud platforms and deployment pipelines;</li>
+<li>Ability to reason about data quality and monitoring;</li>
+<li>A product mindset that connects technical decisions with business outcomes.</li>
+</ul>
+<p><strong>The role of the data scientist is not disappearing but transforming. We are moving from being model artisans to becoming system architects.</strong></p>
+<p>For data scientists, the challenge is not to cling to old definitions of the job, but to embrace this new hybrid identity: part statistician, part engineer, part product thinker.</p>
+<p>And if we succeed, we'll remain at the center of how intelligent systems are designed, deployed, and trusted.</p>
+<hr />
+<p><em>This post is not meant to provide definitive answers or prescriptive guidance. Its goal is to spark reflections and discussions on the topic.</em></p>
+<p><em>The views expressed are my own.</em></p>
+<hr />
+<p><strong>Tags:</strong> AI, Data Science, MLOps, Careers</p>
+  </main>
+
+  <footer class="article-footer">
+    <div class="container">
+      <div class="article-footer-inner">
+        <div class="article-footer-tags">
+          <span class="label">Tags</span>
+          <span class="tag-static">AI</span> <span class="tag-static">Data Science</span> <span class="tag-static">MLOps</span> <span class="tag-static">Careers</span>
+        </div>
+        <a class="back-link" href="../../">← All articles</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+</body>
+</html>

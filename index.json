@@ -1,0 +1,173 @@
+[
+  {
+    "title": "Your Workflow Is Undocumented Code",
+    "slug": "your-workflow-is-undocumented-code",
+    "date": "2026-02-24",
+    "tags": ["AI", "Software Development", "Developer Tools", "Claude Code", "Productivity"],
+    "description": "What I found out when I automated my publishing pipeline with Claude Code.",
+    "excerpt": "For a while, my publishing process worked fine. I wrote articles and edited them locally, then manually copied them online, and manually synchronize their publications with the GitHub repository.",
+    "type": "Reflection",
+    "difficulty": "Beginner",
+    "url": "/articles/your-workflow-is-undocumented-code/"
+  },
+  {
+    "title": "LangChain Middlewares: lightweight hooks for more structured agents",
+    "slug": "langchain-middlewares-lightweight-hooks-for-more-structured-agents",
+    "date": "2025-11-17",
+    "tags": [
+      "AI",
+      "AI Agent",
+      "LangChain",
+      "Python"
+    ],
+    "description": "A deep dive into LangChain's middleware feature \u2014 reusable lifecycle hooks for logging, memory injection, and control inside the agent loop.",
+    "excerpt": "LangChain Middlewares: lightweight hooks for more structured agents Alessandro Garavaglia | 8 min read | Nov 17, 2025 --- When you build AI agents, the deeper you go, the more you realize that 80% of",
+    "type": "Deep Dive",
+    "difficulty": "Intermediate",
+    "url": "/articles/langchain-middlewares-lightweight-hooks-for-more-structured-agents/"
+  },
+  {
+    "title": "Brainstorming about AI agents governance (Part 3/3): The legacy-heavy, regulated enterprise",
+    "slug": "brainstorming-about-ai-agents-governance-part-33-the-legacy-heavy-regulated-enterprise",
+    "date": "2025-10-29",
+    "tags": [
+      "AI",
+      "AI Agent",
+      "AI Governance",
+      "Enterprise Technology",
+      "Digital Transformation"
+    ],
+    "description": "Applying the agents governance framework in legacy-heavy, regulated enterprises where compliance drives every decision and tech stacks are fragmented.",
+    "excerpt": "Brainstorming about AI agents governance (Part 3/3): The legacy-heavy, regulated enterprise Alessandro Garavaglia | 6 min read | Oct 29, 2025 --- In Part 1, I introduced a governance framework for AI",
+    "type": "Framework",
+    "difficulty": "Intermediate",
+    "url": "/articles/brainstorming-about-ai-agents-governance-part-33-the-legacy-heavy-regulated-enterprise/"
+  },
+  {
+    "title": "Does UI-based AI agents development make sense?",
+    "slug": "does-ui-based-ai-agents-development-make-sense",
+    "date": "2025-10-22",
+    "tags": [
+      "AI",
+      "AI Agent",
+      "Innovation"
+    ],
+    "description": "UI-based agent builders like LangFlow and n8n are great for prototyping and collaboration \u2014 but do they hold up when it's time to ship to production?",
+    "excerpt": "Does UI-based AI agents development make sense?",
+    "type": "Opinion",
+    "difficulty": "Beginner",
+    "url": "/articles/does-ui-based-ai-agents-development-make-sense/"
+  },
+  {
+    "title": "Brainstorming about AI agents governance (Part 2/3): The digital-native enterprise",
+    "slug": "brainstorming-about-ai-agents-governance-part-23-the-digital-native-enterprise",
+    "date": "2025-10-08",
+    "tags": [
+      "AI",
+      "AI Agent",
+      "AI Governance",
+      "Enterprise Technology",
+      "Digital Transformation"
+    ],
+    "description": "How the agents governance framework adapts in digital-native companies with modern infrastructure, CI/CD culture, and self-service tooling.",
+    "excerpt": "Brainstorming about AI agents governance (Part 2/3): The digital-native enterprise Alessandro Garavaglia | 6 min read | Oct 8, 2025 --- In Part 1, I introduced a governance framework for AI agents bas",
+    "type": "Framework",
+    "difficulty": "Intermediate",
+    "url": "/articles/brainstorming-about-ai-agents-governance-part-23-the-digital-native-enterprise/"
+  },
+  {
+    "title": "Some thoughts on my first AI-assisted coding project",
+    "slug": "some-thoughts-on-my-first-ai-assisted-coding-project",
+    "date": "2025-09-23",
+    "tags": [
+      "AI",
+      "Coding",
+      "Python"
+    ],
+    "description": "What I learned building an MCP server demo with 80% AI-generated code \u2014 and why experience still matters when the AI gets it wrong.",
+    "excerpt": "Some thoughts on my first AI-assisted coding project Alessandro Garavaglia | 5 min read | Sep 23, 2025 --- In my work, I have used AI assistants in the past mostly to execute small tasks or as a smart",
+    "type": "Reflection",
+    "difficulty": "Beginner",
+    "url": "/articles/some-thoughts-on-my-first-ai-assisted-coding-project/"
+  },
+  {
+    "title": "From modeling to orchestration: the Data Scientist's journey in the age of GenAI",
+    "slug": "from-modeling-to-orchestration-the-data-scientists-journey-in-the-age-of-genai",
+    "date": "2025-09-17",
+    "tags": [
+      "AI",
+      "Data Science",
+      "MLOps",
+      "Careers"
+    ],
+    "description": "How AI agents, AutoML, and off-the-shelf solutions are reshaping what it means to be a data scientist \u2014 from model artisan to system architect.",
+    "excerpt": "From modeling to orchestration: the Data Scientist's journey in the age of GenAI How AI agents, AutoML, and off-the-shelf solutions are reshaping what it means to build intelligence, and what skills m",
+    "type": "Reflection",
+    "difficulty": "Beginner",
+    "url": "/articles/from-modeling-to-orchestration-the-data-scientists-journey-in-the-age-of-genai/"
+  },
+  {
+    "title": "Building an MCP Server with FastMCP: A Hands-On Demo",
+    "slug": "building-an-mcp-server-with-fastmcp-a-hands-on-demo",
+    "date": "2025-09-09",
+    "tags": [
+      "AI",
+      "MCP",
+      "Python",
+      "AI Agent"
+    ],
+    "description": "A hands-on walkthrough of building a containerized e-commerce MCP server with FastMCP, PostgreSQL, and a Streamlit UI \u2014 fully runnable with docker compose.",
+    "excerpt": "Building an MCP Server with FastMCP: A Hands-On Demo Alessandro Garavaglia | 8 min read | Sep 9, 2025 --- If you've been following the developments around the Model Context Protocol (MCP), you've prob",
+    "type": "Deep Dive",
+    "difficulty": "Intermediate",
+    "url": "/articles/building-an-mcp-server-with-fastmcp-a-hands-on-demo/"
+  },
+  {
+    "title": "Brainstorming about AI Agents governance (Part 1/3): Principles",
+    "slug": "brainstorming-about-ai-agents-governance-part-13-principles",
+    "date": "2025-08-31",
+    "tags": [
+      "AI",
+      "AI Agent",
+      "AI Governance",
+      "Enterprise Technology",
+      "Digital Transformation"
+    ],
+    "description": "A governance framework for AI agents built around three pillars \u2014 Governance, Execution, and Supervision \u2014 to help enterprises scale agents responsibly.",
+    "excerpt": "Brainstorming about AI Agents governance (Part 1/3): Principles Alessandro Garavaglia | 9 min read | Aug 31, 2025 --- AI agents are starting to show up everywhere across enterprises.",
+    "type": "Framework",
+    "difficulty": "Intermediate",
+    "url": "/articles/brainstorming-about-ai-agents-governance-part-13-principles/"
+  },
+  {
+    "title": "Can you guess who wrote this?",
+    "slug": "can-you-guess-who-wrote-this",
+    "date": "2025-08-12",
+    "tags": [
+      "AI",
+      "Responsible AI",
+      "AI Ethics"
+    ],
+    "description": "A reflection on the current state of AI text detection \u2014 why it matters, how it works, where it fails, and what questions we should really be asking.",
+    "excerpt": "Can you guess who wrote this? A brief discussion about detecting AI-generated content (and yes, AI helped me writing this).",
+    "type": "Reflection",
+    "difficulty": "Beginner",
+    "url": "/articles/can-you-guess-who-wrote-this/"
+  },
+  {
+    "title": "Why you should still care about ML in the Agentic AI age",
+    "slug": "why-you-should-still-care-about-ml-in-the-agentic-ai-age",
+    "date": "2025-07-03",
+    "tags": [
+      "AI",
+      "AI Agent",
+      "MLOps",
+      "Machine Learning"
+    ],
+    "description": "Classical ML provides the structured decision signals that LLMs cannot. As agents scale, MLOps becomes the foundation that keeps them trustworthy.",
+    "excerpt": "Why you should still care about ML in the Agentic AI age Alessandro Garavaglia | 5 min read | Jul 3, 2025 --- As AI gains traction in enterprise workflows, there is a growing assumption that LLMs can",
+    "type": "Explainer",
+    "difficulty": "Beginner",
+    "url": "/articles/why-you-should-still-care-about-ml-in-the-agentic-ai-age/"
+  }
+]

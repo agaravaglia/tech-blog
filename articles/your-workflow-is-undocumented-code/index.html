@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="What I found out when I automated my publishing pipeline with Claude Code." />
+  <title>Your Workflow Is Undocumented Code — Alessandro Garavaglia</title>
+  <link rel="stylesheet" href="../../assets/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
+</head>
+<body class="article-page">
+
+  <nav class="site-nav">
+    <div class="container">
+      <div class="site-nav-inner">
+        <a href="../../" class="site-nav-logo">Alessandro Garavaglia<span class="site-nav-dot"> · </span>Tech Blog</a>
+        <div class="site-nav-links">
+          <a href="https://github.com/agaravaglia" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://medium.com/@ale.garavaglia" target="_blank" rel="noopener">Medium</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="article-header">
+    <div class="container">
+      <a class="back-link" href="../../">← All articles</a>
+      <div class="article-meta">
+        <span class="badge badge-type">Reflection</span>
+        <span class="badge badge-difficulty">Beginner</span>
+        <time>February 24, 2026</time>
+      </div>
+    </div>
+  </header>
+
+  <main class="article-content container">
+    <div class="article-title-block">
+      <h1>Your Workflow Is Undocumented Code</h1>
+      <p class="article-description">What I found out when I automated my publishing pipeline with Claude Code.</p>
+    </div>
+
+    <p>For a while, my publishing process worked fine. I wrote articles and edited them locally, then manually copied them online, and manually synchronize their publications with the GitHub repository if the article was about a demo. It worked. But every time I did it, I was running a mental checklist from memory.</p>
+
+    <p>At some point I thought about automating the publication. The obvious path was to use a platform with an API, and script against it. It was a clear and straightforward path, but sounded too easy. I wanted to learn something: build my own static site, own every file, understand what happens between a Markdown file and a live URL. The constraint was self-imposed, and made things interesting.</p>
+
+    <p>Once the site was mine, so was the full path from article to live page. And once I had that path end to end, I could write it down. This article is about what happened when I did.</p>
+
+    <hr>
+
+    <h3>AI assistants are getting a new kind of command</h3>
+
+    <p>Over the past year, AI coding assistants have started converging on a common pattern: slash commands that trigger multi-step workflows. You describe what a workflow should do, and the assistant executes it as a sequence of steps. I use Claude Code for this (it calls them "skills"), but the idea is showing up across tools.</p>
+
+    <p>This is different from asking an AI to help you with a task: when you ask for help, the AI responds to you, but when you define a skill, the AI runs a procedure, and the skill file becomes the specification rather than the conversation. That shift in framing is subtle, but it changes how you think about what you are handing off.</p>
+
+    <p>So what did I specify?</p>
+
+    <hr>
+
+    <h3>The checklist was already there, just not written down</h3>
+
+    <p>Before the skill existed, here is what publishing an article looked like:</p>
+
+    <ul>
+      <li>Open the Markdown file, check the front matter (title, date, tags, all required)</li>
+      <li>Convert the body to HTML</li>
+      <li>Drop the output into the right folder</li>
+      <li>Update the article index (a JSON file the homepage reads from)</li>
+      <li>Rebuild the homepage</li>
+      <li>Commit and push</li>
+    </ul>
+
+    <p>I had that sequence memorized and I ran it the same way every time, but it existed only in my head.</p>
+
+    <blockquote><p><em>Writing the skill did not save me from thinking, instead it forced me to think properly <strong>once</strong>.</em></p></blockquote>
+
+    <p>The act of defining the skill forced me to answer questions I had never explicitly asked. What are the actual steps, in order? What can vary between articles? What must never be skipped? I had answers to all of these, but I had never written them down. The skill file was the first time I did.</p>
+
+    <hr>
+
+    <h3>What the pipeline looks like</h3>
+
+    <p>Here is the full sequence, in rough pseudo-code:</p>
+
+    <pre><code>skill: /blog publish &lt;article-path&gt;
+
+1. PARSE
+   Read the Markdown file
+   Extract front matter: title, date, tags, description, type, difficulty
+   Validate all required fields — raise an error if any are missing
+
+2. RENDER
+   Convert Markdown body to HTML
+   Inject into the article template (header, footer, styles, meta tags)
+   Write output to tech-blog/articles/&lt;slug&gt;.html
+
+3. INDEX
+   Read the current index.json
+   Append the new article entry (slug, title, date, tags, description)
+   Sort all entries by date, newest first
+   Write the updated index.json
+
+4. HOMEPAGE
+   Re-render index.html from the updated index.json
+   Rebuild article cards, tag filters, and the recent articles section
+
+5. PUSH
+   git add the changed files
+   git commit -m "Publish: &lt;title&gt;"
+   git push to agaravaglia/tech-blog
+   GitHub Pages picks it up and goes live</code></pre>
+
+    <p>Five steps that look obvious on paper, but in practice I was skipping the sort in step 3, formatting tags differently depending on my mood, and occasionally pushing without updating the index at all. The skill does not care about any of that — it runs the same sequence every time, regardless of how tired I am.</p>
+
+    <blockquote><p><em>The moment you have to specify every step, you stop glossing over the ones you usually skip.</em></p></blockquote>
+
+    <p>Step 1 is also worth noting. The front matter validation is strict: if a required field is missing, the skill stops and raises an error. That felt annoying at first but prevents me from publishing articles with missing descriptions (and consequently the homepage card would be rendered blank).</p>
+
+    <blockquote><p><em>A skill provides a fundamental shift to English as programming language.</em></p></blockquote>
+
+    <hr>
+
+    <h3>What I actually learned</h3>
+
+    <p>The honest version of this story is not "I saved time" (though I did). It is that writing the skill made me realize my manual process had been inconsistent in ways I had not noticed.</p>
+
+    <p>Tags were formatted differently between early and late articles. Some slugs matched the filenames, some did not. The homepage sort was not always by date. None of these were catastrophic, but they were the kind of thing that accumulates quietly until you sit down to write a specification and suddenly have to make a decision about each one.</p>
+
+    <p>The automation did not just speed up the workflow — it standardized it, so that every article published after the skill existed is consistent with every other one, not because I became more careful, but because the procedure stopped depending on my attention.</p>
+
+    <blockquote><p><em>Automation means deciding, once, how the process should work, while maintaining yourself in control of the process.</em></p></blockquote>
+
+    <hr>
+
+    <h3>Closing thoughts</h3>
+
+    <p>Looking back, the most valuable thing about building my own static site was not the control, it was the excuse it gave me to understand every step of the path from Markdown to live URL, in a way I never had to when someone else's platform was handling it.</p>
+
+    <p>Once you understand each step well enough to describe it, you can write it down, hand it to a skill, and trust that the process will run the same way whether you are tired, distracted, or working through a backlog of articles you meant to publish weeks ago.</p>
+
+    <blockquote><p><em>Every repetitive checklist you run from memory is already code, you just have not written it down yet.</em></p></blockquote>
+
+    <hr>
+
+    <p><em>This post is not meant to provide definitive answers or prescriptive guidance. Its goal is to spark reflections and discussions on the topic.</em></p>
+    <p><em>The views expressed are my own.</em></p>
+
+  </main>
+
+  <footer class="article-footer">
+    <div class="container">
+      <div class="article-footer-inner">
+        <div class="article-footer-tags">
+          <span class="label">Tags</span>
+          <span class="tag-static">AI</span>
+          <span class="tag-static">Software Development</span>
+          <span class="tag-static">Developer Tools</span>
+          <span class="tag-static">Claude Code</span>
+          <span class="tag-static">Productivity</span>
+        </div>
+        <a class="back-link" href="../../">← All articles</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+</body>
+</html>

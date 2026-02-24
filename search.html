@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Browse and search all articles by Alessandro Garavaglia — AI, Data, Python & other things!" />
+  <title>All Articles — Alessandro Garavaglia</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+  <nav class="site-nav">
+    <div class="container">
+      <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo">Alessandro Garavaglia<span class="site-nav-dot"> · </span>Tech Blog</a>
+        <div class="site-nav-links">
+          <a href="https://github.com/agaravaglia" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://medium.com/@ale.garavaglia" target="_blank" rel="noopener">Medium</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="site-header site-header--compact">
+    <div class="container">
+      <p class="site-eyebrow">Alessandro Garavaglia</p>
+      <h1 class="site-title">All Articles</h1>
+      <p class="site-subtitle">AI, Data, Python &amp; other things!</p>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <div class="search-controls">
+      <div class="search-controls-row">
+        <input
+          type="text"
+          id="search-input"
+          class="search-input"
+          placeholder="Search by title, tag, type, difficulty…"
+          aria-label="Search articles"
+        />
+        <select id="sort-select" class="sort-select" aria-label="Sort articles">
+          <option value="date-desc">Newest first</option>
+          <option value="date-asc">Oldest first</option>
+          <option value="title-asc">Title A→Z</option>
+          <option value="title-desc">Title Z→A</option>
+        </select>
+        <button id="filter-toggle" class="filter-toggle-btn" aria-expanded="true" aria-controls="type-filters">
+          Filters <span class="filter-toggle-icon">▾</span>
+        </button>
+      </div>
+      <div id="type-filters" class="tag-filters" role="group" aria-label="Filter by type">
+        <!-- Populated by search.js -->
+      </div>
+    </div>
+
+    <div id="results-header" class="results-header" aria-live="polite">
+      <!-- Populated by search.js -->
+    </div>
+
+    <div id="article-list" class="article-list" aria-live="polite">
+      <!-- Populated by search.js -->
+    </div>
+
+    <div id="load-more-cta"></div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>
+        © 2026 Alessandro Garavaglia ·
+        <a href="https://github.com/agaravaglia" target="_blank" rel="noopener">GitHub</a> ·
+        <a href="https://medium.com/@ale.garavaglia" target="_blank" rel="noopener">Medium</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="assets/search.js"></script>
+
+</body>
+</html>

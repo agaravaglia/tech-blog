@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="What I learned building an MCP server demo with 80% AI-generated code — and why experience still matters when the AI gets it wrong." />
+  <title>Some thoughts on my first AI-assisted coding project — Alessandro Garavaglia</title>
+  <link rel="stylesheet" href="../../assets/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
+</head>
+<body class="article-page">
+
+  <nav class="site-nav">
+    <div class="container">
+      <div class="site-nav-inner">
+        <a href="../../" class="site-nav-logo">Alessandro Garavaglia<span class="site-nav-dot"> · </span>Tech Blog</a>
+        <div class="site-nav-links">
+          <a href="https://github.com/agaravaglia" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://medium.com/@ale.garavaglia" target="_blank" rel="noopener">Medium</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="article-header">
+    <div class="container">
+      <a class="back-link" href="../../">← All articles</a>
+      <div class="article-meta">
+        <span class="badge badge-type">Reflection</span>
+        <span class="badge badge-difficulty">Beginner</span>
+        <time>September 23, 2025</time>
+      </div>
+    </div>
+  </header>
+
+  <main class="article-content container">
+    <div class="article-title-block">
+      <h1>Some thoughts on my first AI-assisted coding project</h1>
+      <p class="article-description">What I learned building an MCP server demo with 80% AI-generated code — and why experience still matters when the AI gets it wrong.</p>
+    </div>
+    <p><strong>Alessandro Garavaglia</strong> | 5 min read | Sep 23, 2025</p>
+<hr />
+<p>In my work, I have used AI assistants in the past mostly to execute small tasks or as a smart "autocomplete". It sounded a little reductive, compared to all the amazing things you read online from other developers. This is why I decided I needed to take this further.</p>
+<p>When I started this experiment, I had one goal in mind: <strong>write as little code as possible myself, and let the AI generate most of it.</strong></p>
+<p>This article is the story of how I tried, and what I learned in the process (if you wonder, I used Gemini 2.5 Pro with its VSCode extension).</p>
+<h3>Step 1: Picking the right demo</h3>
+<p>Every project starts with a choice: <em>what to build?</em></p>
+<p>I did not want to create yet another "Hello World" example. Instead, I looked for something that was both practical and tied to the AI ecosystem. That is when my choice fell on <strong>Model Context Protocol (MCP) servers.</strong></p>
+<p>They felt like the perfect playground: relatively new, not overly complex as concept, but rich enough to make the experiment meaningful.</p>
+<p>From a quick survey of GitHub and Python packages, it was clear that the tool of choice here was <strong>FastMCP</strong>, a framework with many similarities to FastAPI. That was lucky for me: I had worked with FastAPI before, so I already had a mental model of how FastMCP might be structured.</p>
+<h3>Step 2: Learning Just Enough</h3>
+<p>I did not jump straight into prompting. Instead, I spent a couple of hours reading documentation, browsing examples, and trying to get a feel for the "philosophy" of FastMCP.</p>
+<p>I was not aiming to become an expert, just to know enough to:</p>
+<ul>
+<li>recognize what "good" code should look like,</li>
+<li>and avoid asking the AI for something impossible or nonsensical.</li>
+</ul>
+<p>This little investment paid off later, because the clearer your mental model is, the better your prompts will be.</p>
+<h3>Step 3: Writing the Prompt</h3>
+<p>Then came the fun part.</p>
+<p>Instead of opening my editor and typing code, I opened my AI assistant and started writing a <strong>markdown prompt</strong>. For about 30 minutes, I described in detail what I wanted:</p>
+<ul>
+<li>the overall project structure;</li>
+<li>how services should be defined in Docker Compose;</li>
+<li>which files should go where;</li>
+<li>and even stylistic conventions (docstrings, type hints, decorators).</li>
+</ul>
+<p>I wrote it as though I were preparing an architecture spec, except the implementer was an AI.</p>
+<h3>Step 4: The First Attempt</h3>
+<p>The AI came back with a fully fleshed-out project.</p>
+<p>I was impressed: the structure was there, the servers were defined, the logic mostly made sense. But as I started digging in, I noticed a few things did not quite work.</p>
+<p>Some issues were stylistic (like how decorators were being used), while others were more subtle. For example, the AI confidently generated code that <em>looked right</em>, but was not actually valid Python or did not behave as expected.</p>
+<p>Here's one such hallucination. In the <code>ui/bot.py</code> file, the AI generated the following code:</p>
+<pre><code class="language-python">from langgraph.prebuilt import create_tool_calling_agent
+
+## define agent
+agent_executor = AgentExecutor(
+    agent=create_tool_calling_agent(
+        llm=llm,
+        prompt=prompt,
+        tools=tools
+    ),
+    tools=tools,
+    verbose=True,
+    handle_parsing_errors=True,
+)
+</code></pre>
+<p>Unfortunately, this was an hallucination, since the package <code>langgraph.prebuilt</code> does not contain any <code>create_tool_calling_agent</code>. This method is instead contained in the <code>langchain.agents</code> module.</p>
+<p>So the correct code was:</p>
+<pre><code class="language-python">from langchain.agents import create_tool_calling_agent
+
+## define agent
+agent_executor = AgentExecutor(
+    agent=create_tool_calling_agent(
+        llm=llm,
+        prompt=prompt,
+        tools=tools
+    ),
+    tools=tools,
+    verbose=True,
+    handle_parsing_errors=True,
+)
+</code></pre>
+<p>This was a little bit tricky to identify, and having prior experience really mattered.</p>
+<h3>Step 5: Iterating</h3>
+<p>I went back to my prompt, refined it, and asked again.</p>
+<p>This second attempt was much closer. I only had to make a few manual adjustments: for example, prefixing backend "private" functions in all the servers <code>helpers.py</code> files with <code>_</code>, or tweaking docstrings to match my preferred style.</p>
+<p>At this point, I had something solid enough to use as the foundation of my demo: <a href="https://github.com/ale-garavaglia/fastmcp-ecommerce-demo">fastmcp-ecommerce-demo</a>.</p>
+<p>Looking back, I would estimate <strong>80% of the code was generated by the AI</strong>, while the rest was either:</p>
+<ul>
+<li>intentional changes I made for clarity and style, or</li>
+<li>small but important bug fixes that the AI did not catch.</li>
+</ul>
+<h3>Reflections Along the Way</h3>
+<p>This whole process felt strange but exciting.</p>
+<p>On the one hand, I was coding less than ever before. On the other, I was spending more time thinking about structure, architecture, and clarity, because the quality of the AI's output depended directly on the quality of my input.</p>
+<p>A few key lessons stood out:</p>
+<ul>
+<li><strong>AI is amazing at scaffolding:</strong> It can produce a lot of boilerplate quickly, especially if you know what to ask for.</li>
+<li><strong>Debugging is unavoidable:</strong> Even if the AI gets most of it right, the last 20% often requires human judgment and debugging skills.</li>
+<li><strong>Experience changes the outcome:</strong> My familiarity with Python, FastAPI and the time spent reading the FastMCP documentation helped. Without that, I would have trusted flawed code.</li>
+</ul>
+<h3>What About Juniors?</h3>
+<p>Here's the question that kept coming back to me: <em>what happens when a junior developer tries this?</em></p>
+<p>When I learned to code, I spent countless hours debugging, reading StackOverflow, and piecing things together by hand. That painful process built the mental clarity I still rely on today.</p>
+<blockquote>
+<p><em>AI short-circuits that journey. It gives you answers right away, sometimes correct, sometimes "plausibly wrong." But if you do not yet have the instincts to tell the difference, how do you learn?</em></p>
+</blockquote>
+<p>This makes me wonder:</p>
+<ul>
+<li>How should we teach coding in an AI-first world?</li>
+<li>How do we ensure juniors still develop the problem-solving skills and structured thinking that good prompts depend on?</li>
+<li>Is there a risk that AI becomes a crutch that hides errors instead of teaching how to fix them?</li>
+</ul>
+<p>I don't have a full answer yet, but I know this are relevant questions.</p>
+<h3>Closing Thoughts</h3>
+<p>In the end, my little experiment worked: I built a running demo with minimal manual coding, thanks to AI.</p>
+<p>But the real takeaway was not the code itself, it was the process. AI did not eliminate the need for my experience; it amplified it. The clearer I was in my thinking, the better the results.</p>
+<p>So here is my conclusion: <strong>AI is not about writing less code, it is about thinking more clearly.</strong></p>
+<p>And if that is true, then our biggest challenge ahead is not "how do we code with AI?" but <strong>"how do we <em>learn</em> to code with AI?"</strong></p>
+<hr />
+<p><em>This post is not meant to provide definitive answers or prescriptive guidance. Its goal is to spark reflections and discussions on the topic.</em></p>
+<p><em>The views expressed are my own.</em></p>
+<hr />
+<p><strong>Tags:</strong> AI, Coding, Ai Coding, Python</p>
+  </main>
+
+  <footer class="article-footer">
+    <div class="container">
+      <div class="article-footer-inner">
+        <div class="article-footer-tags">
+          <span class="label">Tags</span>
+          <span class="tag-static">AI</span> <span class="tag-static">Coding</span> <span class="tag-static">Python</span>
+        </div>
+        <a class="back-link" href="../../">← All articles</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A governance framework for AI agents built around three pillars — Governance, Execution, and Supervision — to help enterprises scale agents responsibly." />
+  <title>Brainstorming about AI Agents governance (Part 1/3): Principles — Alessandro Garavaglia</title>
+  <link rel="stylesheet" href="../../assets/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
+</head>
+<body class="article-page">
+
+  <nav class="site-nav">
+    <div class="container">
+      <div class="site-nav-inner">
+        <a href="../../" class="site-nav-logo">Alessandro Garavaglia<span class="site-nav-dot"> · </span>Tech Blog</a>
+        <div class="site-nav-links">
+          <a href="https://github.com/agaravaglia" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://medium.com/@ale.garavaglia" target="_blank" rel="noopener">Medium</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="article-header">
+    <div class="container">
+      <a class="back-link" href="../../">← All articles</a>
+      <div class="article-meta">
+        <span class="badge badge-type">Framework</span>
+        <span class="badge badge-difficulty">Intermediate</span>
+        <time>August 31, 2025</time>
+      </div>
+    </div>
+  </header>
+
+  <main class="article-content container">
+    <div class="article-title-block">
+      <h1>Brainstorming about AI Agents governance (Part 1/3): Principles</h1>
+      <p class="article-description">A governance framework for AI agents built around three pillars — Governance, Execution, and Supervision — to help enterprises scale agents responsibly.</p>
+    </div>
+    <p><strong>Alessandro Garavaglia</strong> | 9 min read | Aug 31, 2025</p>
+<hr />
+<p>AI agents are starting to show up everywhere across enterprises. They are getting more and more results at automating tasks, interacting with internal systems, generating content, making decisions.</p>
+<p>Some are simple prompts processed by a large language model. Others are complex, reasoning systems built on top of scaling infrastructure and capable of autonomous decisions.</p>
+<p>That's exciting. But it's also a bit chaotic.</p>
+<h3>What is the problem with Agents governance?</h3>
+<p>As adoption accelerates, many companies are running into deploying more and more agents. However, this growth is often <strong>uncontrolled and fragmented</strong>, leading to:</p>
+<ul>
+<li><strong>Shadow IT:</strong> Agents developed outside approved workflows;</li>
+<li><strong>Redundancy and inconsistency:</strong> Similar agents built by different teams, often without a common standard;</li>
+<li><strong>Compliance risks:</strong> Deployment without proper control can have teams overlook laws or internal policies;</li>
+<li><strong>Lack of transparency:</strong> Difficulty in tracing how agents operate or make decisions, in particular when they are deployed on different systems or platforms;</li>
+</ul>
+<blockquote>
+<p><em>This creates real problems: security concerns, duplicated efforts, compliance gaps (especially with GDPR or the AI Act), and in some cases, a lack of accountability when something goes wrong.</em></p>
+</blockquote>
+<p>It is better then to try and put some effort in designing principles.</p>
+<h3>The framework at a glance</h3>
+<p>The framework is structured around three responsibility pillars, which define the different areas of ownerships of an agentic platform.</p>
+<ul>
+<li><strong>Governance:</strong> ensures agents are registered, reviewed, and aligned with policies and laws;</li>
+<li><strong>Execution:</strong> manages the agent lifecycle and governs accesses and authorizations of agents;</li>
+<li><strong>Supervision:</strong> defines limitations and scope of agents with respect to business processes and ensure visibility and tracing of all activities.</li>
+</ul>
+<p>Across these areas, there are different level of implementation:</p>
+<ul>
+<li><strong>Strategy:</strong> these are the high-level decision made to steer and guide the adoption of AI in the enterprise;</li>
+<li><strong>Operations:</strong> this level describe the need of the team working in the area and the tasks they need to perform to bring on the strategy;</li>
+<li><strong>Technical:</strong> this is the level where we can list tools and technologies, implemented in such a way they can support the teams in their operations.</li>
+</ul>
+<p>And there's one key principle throughout: <strong>strong governance doesn't require centralizing your entire tech stack</strong>. Teams can keep using the tools that work for them — as long as they follow common rules and processes.</p>
+<p><img alt="Framework overview — three pillars across three levels" src="additional_files/images/image-01.png" /></p>
+<hr />
+<h3>1. Governance</h3>
+<h4>AI Governance Board</h4>
+<p>This is the team or the virtual function responsible for oversight. Think of it as a control tower for your AI agents.</p>
+<p>It maintains a <strong>central registry</strong> of all active agents, including who owns them, what they do, where they run, and how risky they are. Every new agent goes through a lightweight but formal <strong>approval process</strong>, where it's reviewed for:</p>
+<ul>
+<li><strong>Business value:</strong> What's the purpose? Is this solving a real problem?</li>
+<li><strong>Compliance:</strong> What data does it access? Is it aligned with AI Act/GDPR?</li>
+<li><strong>Risk level:</strong> Could it cause harm if it fails or misbehaves? What guardrails or safety measure are in place to prevent it?</li>
+<li><strong>Ethics and bias:</strong> What are potential biases present? How can they be prevented?</li>
+<li><strong>Access:</strong> What systems, APIs, or tools will it interact with?</li>
+</ul>
+<p>This doesn't have to be slow or bureaucratic. In fact, the goal is to keep the barrier low for experimentation — but make sure anything that hits production has been <strong>registered, reviewed, and approved</strong>.</p>
+<h4>Agent Manifest</h4>
+<p>Every agent in production should come with a <strong>structured manifest</strong> — ideally in a machine-readable format like YAML or JSON.</p>
+<p>This file acts like a passport. It defines what the agent is, what it's allowed to do, and how it should be treated. Fields can typically include:</p>
+<ul>
+<li>Name and version</li>
+<li>Team/owner</li>
+<li>Purpose or business function</li>
+<li>Which tools and APIs it can use</li>
+<li>Permission scope (read, write, admin, etc.)</li>
+<li>Runtime limits (execution time, budget, request frequency)</li>
+<li>Risk tier (low/medium/high)</li>
+<li>Deployment (platform, environment, etc..)</li>
+</ul>
+<p>You can use these manifests for explorability, approvals, and audits. They make agents legible, ideally to both humans and machines.</p>
+<h4>Registry &amp; Repository</h4>
+<p>This is the technical layer where agents are stored, versioned, and prepared for deployment. Depending on the environment, this could mean:</p>
+<ul>
+<li>Storing container images (e.g. Docker);</li>
+<li>Agent definitions (e.g. JSON/YAML) to integrate with external platforms via API;</li>
+<li>Code in Git-like repositories.</li>
+</ul>
+<p>The important principle here is <strong>the manifest stays clean and platform-agnostic</strong>. It defines what the agent is and what it's allowed to do, not how it's deployed.</p>
+<p>In fact, the deployment complexity is pushed to the Execution pillar, which takes care of the specific logics for the agents integrations and deployments.</p>
+<p><img alt="Governance pillar — strategy, operations, and technical levels" src="additional_files/images/image-02.png" /></p>
+<hr />
+<h3>2. Execution</h3>
+<h4>Agent Platform-as-a-Service</h4>
+<p>Whether you use a centralized internal platform or let teams run agents on their own stacks, what matters is to have a central hub for visibility and governance.</p>
+<p>It helps to have <strong>some shared services</strong> in place:</p>
+<ul>
+<li>Catalog exploration and submission of new agent manifests (it can be via code, but also a UI for non technical users can be helpful);</li>
+<li>Pipelines to <strong>test and deploy</strong> agents automatically;</li>
+<li>Tools and connections for Agents to be used;</li>
+<li>Tools for <strong>logging and monitoring</strong>;</li>
+<li>Standard ways to <strong>deprecate or roll back</strong> agents;</li>
+</ul>
+<p>An important remark here is the distinction between two concepts of platform:</p>
+<ul>
+<li><strong>Agent deployment platform(s):</strong> the platform(s) where the code of the agent is deployed and running (Kubernetes, VMs, Model Endpoints, Cloud platform, etc…).</li>
+<li><strong>Agent Platform-as-a-Service:</strong> this is where the deployment and checks of agent manifests is done, as well as providing necessary tools and connections to agents in order to be called. <strong>This is not necessarily the same as the Agents deployment platform.</strong></li>
+</ul>
+<blockquote>
+<p><em>The Agents PaaS is abstracting away the governance and deployment processes from the execution platforms where the agents will be running.</em></p>
+</blockquote>
+<p>The key goal of the Agents PaaS is to provide a <strong>central point of governance</strong> where the different business or tech teams can submit requests to create agents via manifests, which then the platform will deploy to the correct environment or technology when approved.</p>
+<h4>Deployment &amp; Authorization</h4>
+<p>This is a key part of the Agent PaaS, in fact this is where the coordination between different technology stacks and systems happen.</p>
+<p>The platform is in charge of:</p>
+<ul>
+<li><strong>Deployment:</strong> the platform implements the specific logics to deploy an Agent starting from a manifest. For example, it can push an agent via API to a Cloud platform, or deploy a containerized version as a serverless application (Lambda, Cloud Functions, etc…).</li>
+<li><strong>Authorization:</strong> This is the part where the platform coordinates the accesses of agents to different systems, specifying which level of permissions are needed. For example, an agent to write a personalized email can access the Customer Data Platform only as a reader.</li>
+</ul>
+<blockquote>
+<p><em>Think of it like a traffic controller, making sure that even if agents are autonomous, they don't go rogue.</em></p>
+</blockquote>
+<h4>Tool connectors</h4>
+<p>The Agent PaaS should be responsible for the deployment of resources that are needed for the implementation of deployment and authorization logics.</p>
+<p>If an agent is running on a SaaS cloud platform the infrastructure will be managed by the vendor, but the services to connect to internal enterprise systems will be in charge of the Agents platform.</p>
+<p>Examples (not exhaustive) can be:</p>
+<ul>
+<li>A <strong>CI/CD engine</strong> to execute deployments;</li>
+<li>A <strong>secret manager</strong> for deployments runtime;</li>
+<li><strong>MCP servers</strong> for decoupling the agents from the systems, in order to standardize tools;</li>
+<li><strong>Supervision Agents</strong>, whose task is to coordinate the actions of different agents;</li>
+<li><strong>Container registries</strong> for storing versions of agents internally deployed.</li>
+</ul>
+<p><img alt="Execution pillar — Agent PaaS, deployment and authorization, tool connectors" src="additional_files/images/image-03.png" /></p>
+<hr />
+<h3>3. Supervision</h3>
+<h4>Business &amp; FinOps</h4>
+<p>Agents are a hot topic, but it is important to remember that in an enterprise they are there to help and support business processes.</p>
+<p>AI agents (both running internally with LLMs or deployed in third-party platforms) <strong>can get complicated and expensive rather quickly</strong>:</p>
+<ul>
+<li>The <strong>scope of an agent can become too broad</strong> and hard to track;</li>
+<li>More and more tools can be created and used, with the risk of making <strong>harder to track its reasoning</strong>;</li>
+<li>Often every platform has a <strong>different pricing model</strong> for agents or LLMs, which makes hard to control and trace costs for every business area or application.</li>
+</ul>
+<blockquote>
+<p><em>Through the Agents PaaS and with the revision of the AI board, business and finance guidelines should be enforced and monitored across all deployment environments.</em></p>
+</blockquote>
+<p>For Business principles, the strategy should:</p>
+<ul>
+<li>Define escalation rules for high-risk decisions;</li>
+<li>Enforce purpose-bound limits: agents should only do what they're meant to do to solve the business task.</li>
+</ul>
+<p>For FinOps:</p>
+<ul>
+<li>Define budgets at the agent, project, or department level;</li>
+<li>Set alerts and enforcement thresholds to avoid runaway spending.</li>
+</ul>
+<p>By tying financial and business visibility directly into the agent lifecycle, companies can scale AI more sustainably and avoid surprises at the end of the month.</p>
+<h4>Tracing &amp; monitoring</h4>
+<p>Operational supervision requires a different lens. Here, the focus shifts to <strong>what the agent is doing in real time</strong>, and how its behavior can be audited, debugged, or explained.</p>
+<p>Key capabilities include:</p>
+<ul>
+<li><strong>Chain-of-thought tracing:</strong> Log the reasoning path the agent followed to reach a decision (e.g., prompt sequences, memory recalls, tool usage);</li>
+<li><strong>Execution monitoring:</strong> Track input/output flows, external calls, retry loops, and error rates;</li>
+<li><strong>Audit trails:</strong> Every meaningful decision or action taken by the agent should be recorded and timestamped, creating a basis for compliance, debugging, and forensics.</li>
+</ul>
+<p>Agents should not operate in a black box. <strong>Transparency must be built in by design</strong>, especially when they're making decisions that affect customers, data, or critical systems.</p>
+<h4>Observability Stack by Design</h4>
+<p>The last pillar is technical: every agent should plug into a modern observability stack from day one. No custom monitoring duct-taped after deployment.</p>
+<p>At a minimum, the stack should support:</p>
+<ul>
+<li><strong>Structured logging:</strong> JSON logs enriched with metadata (agent ID, version, input type, prompts, tools usage, ...);</li>
+<li><strong>Metrics collection:</strong> Time to response, call latency, memory usage, LLM token counts;</li>
+<li><strong>Dashboards and alerting:</strong> For operations teams to monitor live agents and receive signals when thresholds are breached.</li>
+</ul>
+<p>There are several popular tools that can serve this scope (Grafana, Prometheus, Datadog, …).</p>
+<p>What is crucial is then to create a visibility across deployment platforms, so that agents deployed in different systems can be equally monitored. Clearly, some SaaS cloud solutions have their own tracing and logging systems, which can mean for example an ingestion from the cloud platform to an enterprise system for the aggregation.</p>
+<p><img alt="Supervision pillar — business &amp; FinOps, tracing &amp; monitoring, observability stack" src="additional_files/images/image-04.png" /></p>
+<hr />
+<h3>Centralized governance is a must, centralized tech doesn't have to be</h3>
+<p>One of the core ideas behind this framework is <strong>decoupling governance from implementation</strong>.</p>
+<p>This means you don't need a single unified platform for all your AI agents. In fact, that would probably slow you down. But you <strong>do</strong> need a consistent way to:</p>
+<ul>
+<li>Approve and register agents</li>
+<li>Enforce policies across environments</li>
+<li>Monitor cost and behavior</li>
+<li>Audit decisions and interactions</li>
+</ul>
+<p>This centralized <strong>governance fabric</strong> can work across:</p>
+<ul>
+<li>Different programming languages or frameworks (LangChain, AutoGen, CrewAI, Langflow, custom code, …);</li>
+<li>Various runtimes (cloud, on-prem, edge, ...);</li>
+<li>Multiple data sources or API ecosystems.</li>
+</ul>
+<blockquote>
+<p><em>Different teams can keep using the tools that work for them, while the organization maintains visibility, accountability, and control.</em></p>
+</blockquote>
+<hr />
+<h3>Wrapping up</h3>
+<p>As AI agents become more powerful and widespread, governance can't be an afterthought. Without clear structures in place, technical and organizational risks can grow quickly.</p>
+<p><img alt="The overall framework." src="additional_files/images/framework.webp" /></p>
+<p>The ideas brainstormed here can provide a <strong>flexible foundation</strong> for building and scaling AI agents responsibly. This framework can:</p>
+<ul>
+<li>Help organizations stay compliant and in control;</li>
+<li>Support fast innovation without sacrificing safety;</li>
+<li>It gives teams autonomy, with clear guardrails.</li>
+</ul>
+<h3>What's next</h3>
+<p>In the following two posts, I will try to reason on <strong>how this framework plays out in practice</strong>:</p>
+<ul>
+<li>First, in a <strong>digital-native, cloud-first company</strong>;</li>
+<li>Then, in a <strong>legacy-heavy, regulated enterprise environment</strong>.</li>
+</ul>
+<p>Thanks for reading!</p>
+<hr />
+<p><em>This post is not meant to provide definitive answers or prescriptive guidance. Its goal is to spark reflections and discussions on the topic.</em></p>
+<p><em>The views expressed are my own.</em></p>
+<hr />
+<p><strong>Tags:</strong> AI, AI Agent, AI Governance, Agentic AI Architecture, Enterprise Technology</p>
+  </main>
+
+  <footer class="article-footer">
+    <div class="container">
+      <div class="article-footer-inner">
+        <div class="article-footer-tags">
+          <span class="label">Tags</span>
+          <span class="tag-static">AI</span> <span class="tag-static">AI Agent</span> <span class="tag-static">AI Governance</span> <span class="tag-static">Enterprise Technology</span> <span class="tag-static">Digital Transformation</span>
+        </div>
+        <a class="back-link" href="../../">← All articles</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+</body>
+</html>
