@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="30.0 11.4 850.0 560.7" width="850" height="561">
+<defs>
+  <style>
+    @font-face {
+      font-family: 'Virgil';
+      src: url('https://excalidraw.com/Virgil.woff2');
+    }
+    @font-face {
+      font-family: 'Cascadia';
+      src: url('https://excalidraw.com/Cascadia.woff2');
+    }
+    @font-face {
+      font-family: 'Assistant';
+      src: url('https://fonts.gstatic.com/s/assistant/v19/2sDcZGJYnIjSi6H75xkZZE1I0yCmYzzUtuZZEA.woff2');
+    }
+  </style>
+</defs>
+<rect x="30.0" y="11.4" width="850.0" height="560.7" fill="#ffffff" />
+<text x="462.45" y="55.41" font-size="24" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">WHICH SHAP EXPLAINER SHOULD YOU USE?</text>
+<rect x="350" y="80" width="220" height="80" rx="16" ry="16" fill="#339af0" stroke="#1971c2" stroke-width="2"  opacity="1.0" />
+<text x="460.00" y="118.00" font-size="18" font-family="Virgil, Arial, sans-serif" fill="#ffffff" text-anchor="middle" opacity="1.0">What model</text>
+<text x="460.00" y="143.00" font-size="18" font-family="Virgil, Arial, sans-serif" fill="#ffffff" text-anchor="middle" opacity="1.0">are you using?</text>
+<path d="M 370.00,160.00 L 190.00,220.00" fill="none" stroke="#12b886" stroke-width="2"  />
+<polygon points="190.00,220.00 198.22,213.04 200.75,220.63" fill="#12b886" />
+<path d="M 420.00,160.00 L 370.00,220.00" fill="none" stroke="#1971c2" stroke-width="2"  />
+<polygon points="370.00,220.00 373.33,209.76 379.47,214.88" fill="#1971c2" />
+<path d="M 500.00,160.00 L 550.00,220.00" fill="none" stroke="#9775fa" stroke-width="2"  />
+<polygon points="550.00,220.00 540.53,214.88 546.67,209.76" fill="#9775fa" />
+<path d="M 550.00,160.00 L 730.00,220.00" fill="none" stroke="#e03131" stroke-width="2"  />
+<polygon points="730.00,220.00 719.25,220.63 721.78,213.04" fill="#e03131" />
+<rect x="70" y="230" width="160" height="70" rx="12" ry="12" fill="#f1f3f5" stroke="#868e96" stroke-width="2"  opacity="1.0" />
+<text x="150.00" y="254.00" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">Tree-based?</text>
+<text x="150.00" y="270.67" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">(XGBoost, RF,</text>
+<text x="150.00" y="287.33" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">LightGBM)</text>
+<rect x="270" y="230" width="160" height="70" rx="12" ry="12" fill="#f1f3f5" stroke="#868e96" stroke-width="2"  opacity="1.0" />
+<text x="350.00" y="254.00" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">Linear model?</text>
+<text x="350.00" y="270.67" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">(LogReg, Ridge,</text>
+<text x="350.00" y="287.33" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">Lasso)</text>
+<rect x="470" y="230" width="160" height="70" rx="12" ry="12" fill="#f1f3f5" stroke="#868e96" stroke-width="2"  opacity="1.0" />
+<text x="550.00" y="254.00" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">Neural network?</text>
+<text x="550.00" y="270.67" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">(TF, PyTorch,</text>
+<text x="550.00" y="287.33" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">Keras)</text>
+<rect x="670" y="230" width="160" height="70" rx="12" ry="12" fill="#f1f3f5" stroke="#868e96" stroke-width="2"  opacity="1.0" />
+<text x="750.00" y="259.00" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">Other/Custom</text>
+<text x="750.00" y="284.00" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">model?</text>
+<text x="130.00" y="324.00" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#12b886" text-anchor="start" opacity="1.0">YES</text>
+<text x="330.00" y="324.00" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#1971c2" text-anchor="start" opacity="1.0">YES</text>
+<text x="530.00" y="324.00" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#9775fa" text-anchor="start" opacity="1.0">YES</text>
+<text x="730.00" y="324.00" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#e03131" text-anchor="start" opacity="1.0">YES</text>
+<path d="M 150.00,330.00 L 150.00,370.00" fill="none" stroke="#12b886" stroke-width="2"  />
+<polygon points="150.00,370.00 146.00,360.00 154.00,360.00" fill="#12b886" />
+<path d="M 350.00,330.00 L 350.00,370.00" fill="none" stroke="#1971c2" stroke-width="2"  />
+<polygon points="350.00,370.00 346.00,360.00 354.00,360.00" fill="#1971c2" />
+<path d="M 550.00,330.00 L 550.00,370.00" fill="none" stroke="#9775fa" stroke-width="2"  />
+<polygon points="550.00,370.00 546.00,360.00 554.00,360.00" fill="#9775fa" />
+<path d="M 750.00,330.00 L 750.00,370.00" fill="none" stroke="#e03131" stroke-width="2"  />
+<polygon points="750.00,370.00 746.00,360.00 754.00,360.00" fill="#e03131" />
+<rect x="50" y="380" width="180" height="120" rx="16" ry="16" fill="#40c057" stroke="#2f9e44" stroke-width="2"  opacity="1.0" />
+<text x="140.00" y="413.00" font-size="18" font-family="Virgil, Arial, sans-serif" fill="#ffffff" text-anchor="middle" opacity="1.0">TreeExplainer</text>
+<text x="140.00" y="446.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#ffffff" text-anchor="middle" opacity="1.0">Exact</text>
+<text x="140.00" y="471.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#ffffff" text-anchor="middle" opacity="1.0">Very Fast</text>
+<rect x="260" y="380" width="180" height="120" rx="16" ry="16" fill="#339af0" stroke="#1971c2" stroke-width="2"  opacity="1.0" />
+<text x="350.00" y="413.00" font-size="18" font-family="Virgil, Arial, sans-serif" fill="#ffffff" text-anchor="middle" opacity="1.0">LinearExplainer</text>
+<text x="350.00" y="446.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#ffffff" text-anchor="middle" opacity="1.0">Exact</text>
+<text x="350.00" y="471.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#ffffff" text-anchor="middle" opacity="1.0">Fastest</text>
+<rect x="470" y="380" width="180" height="120" rx="16" ry="16" fill="#9775fa" stroke="#7950f2" stroke-width="2"  opacity="1.0" />
+<text x="560.00" y="413.00" font-size="18" font-family="Virgil, Arial, sans-serif" fill="#ffffff" text-anchor="middle" opacity="1.0">DeepExplainer</text>
+<text x="560.00" y="446.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#ffffff" text-anchor="middle" opacity="1.0">Approximate</text>
+<text x="560.00" y="471.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#ffffff" text-anchor="middle" opacity="1.0">Medium</text>
+<rect x="680" y="380" width="180" height="120" rx="16" ry="16" fill="#e03131" stroke="#c92a2a" stroke-width="2"  opacity="1.0" />
+<text x="770.00" y="413.00" font-size="18" font-family="Virgil, Arial, sans-serif" fill="#ffffff" text-anchor="middle" opacity="1.0">KernelExplainer</text>
+<text x="770.00" y="446.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#ffffff" text-anchor="middle" opacity="1.0">Approximate</text>
+<text x="770.00" y="471.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#ffffff" text-anchor="middle" opacity="1.0">Slow</text>
+<text x="455.20" y="541.09" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#e03131" text-anchor="middle" opacity="1.0">Tip: When in doubt, specify the explainer explicitly rather than relying on auto-detection</text>
+</svg>
