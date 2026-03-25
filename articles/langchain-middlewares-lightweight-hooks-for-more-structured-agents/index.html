@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A deep dive into LangChain's middleware feature — reusable lifecycle hooks for logging, memory injection, and control inside the agent loop." />
+  <title>LangChain Middlewares: lightweight hooks for more structured agents — Alessandro Garavaglia</title>
+  <link rel="stylesheet" href="../../assets/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
+</head>
+<body class="article-page">
+
+  <nav class="site-nav">
+    <div class="container">
+      <div class="site-nav-inner">
+        <a href="../../" class="site-nav-logo">Alessandro Garavaglia<span class="site-nav-dot"> · </span>Tech Blog</a>
+        <div class="site-nav-links">
+          <a href="https://github.com/agaravaglia" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://medium.com/@ale.garavaglia" target="_blank" rel="noopener">Medium</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="article-header">
+    <div class="container">
+      <a class="back-link" href="../../">← All articles</a>
+      <div class="article-meta">
+        <span class="badge badge-type">Deep Dive</span>
+        <span class="badge badge-difficulty">Intermediate</span>
+        <time>November 17, 2025</time>
+      </div>
+    </div>
+  </header>
+
+  <main class="article-content container">
+    <div class="article-title-block">
+      <h1>LangChain Middlewares: lightweight hooks for more structured agents</h1>
+      <p class="article-description">A deep dive into LangChain's middleware feature — reusable lifecycle hooks for logging, memory injection, and control inside the agent loop.</p>
+    </div>
+    <p><strong>Alessandro Garavaglia</strong> | 8 min read | Nov 17, 2025</p>
+<hr />
+<p>When you build AI agents, the deeper you go, the more you realize that 80% of your time is spent <em>not</em> in LLM reasoning, but in <em>everything around it</em>: logging, state management, validation, retries, safety, metrics, memory updates, tool orchestration.</p>
+<p>Frameworks like <strong>LangChain</strong> and <strong>LangGraph</strong> have been trying to tame this complexity from different angles. LangGraph gives you a robust graph-based runtime for defining and executing complex agentic flows. LangChain, instead, is an orchestration framework for building LLM applications with linear or simple sequential workflows.</p>
+<p>Now, LangChain has introduced a new feature that brings more structure and flexibility to this space: <strong>middlewares</strong>.</p>
+<p>If you've ever built a web API, the term <em>middleware</em> probably sounds familiar: small, reusable functions that intercept requests and responses to add cross-cutting logic. LangChain's middlewares serve the same purpose, but inside the <em>agent loop</em>.</p>
+<h3>A quick refresher: LangChain vs LangGraph</h3>
+<p>Before we dive into middlewares, let's quickly recall how <strong>LangChain</strong> and <strong>LangGraph</strong> relate to each other.</p>
+<ul>
+<li>
+<p><strong>LangChain</strong> focuses on abstraction and modularity: models, prompts, memory, and agents as composable components. You can create an agent like <code>create_agent(model, tools)</code> and start reasoning with tools right away.</p>
+</li>
+<li>
+<p><strong>LangGraph</strong>, on the other hand, provides a <strong>graph-based runtime</strong> for orchestrating multiple agents and processes. Each node in the graph is a "unit of computation", and edges define control flow. LangGraph gives you deterministic state management, checkpointing, parallelism, and visibility into execution.</p>
+</li>
+</ul>
+<p>In general, I usually try to start with LangChain for simpler tasks and then transition to LangGraph when the application requires more dynamic decision-making or memory.</p>
+<p>The new <strong>middleware</strong> layer in LangChain now fills the missing middle ground: fine-grained, reusable control <em>inside</em> an agent's loop, without the overhead of designing a full graph.</p>
+<h3>The ReAct agents limitations in LangChain</h3>
+<p>The basic structure of a ReAct (Reasoning + Acting) agent is pretty simple:</p>
+<ul>
+<li>Receive user input;</li>
+<li>Pass to model for reasoning;</li>
+<li>Possibly call a tool;</li>
+<li>Continue reasoning;</li>
+<li>Return final answer.</li>
+</ul>
+<p>The implementation of this in LangChain is pretty straightforward, since it presents a constructor that builds a ReAct logic just from the LLM and the tools to give to the agent:</p>
+<pre><code class="language-python">from langchain.agents import create_agent
+
+agent = create_agent(&quot;gpt-4o&quot;, tools=tools)
+</code></pre>
+<p>The <code>create_agent</code> method implements an out-of-the-box graph-based agent using LangGraph (as explained in the documentation).</p>
+<p>This loop is powerful since it can cover a large set of use cases, but <strong>opaque</strong>. In fact, you cannot easily inject logic between these steps without subclassing the agent itself, or switching to an explicit graph builder in LangGraph.</p>
+<p>That's exactly where <strong>middlewares</strong> come in.</p>
+<h3>Middlewares in LangChain</h3>
+<p>A middleware is a small plug-in that can:</p>
+<ul>
+<li>Intercept execution <strong>before</strong> or <strong>after</strong> model calls or tool calls;</li>
+<li>Modify or enrich the <strong>agent's state</strong>;</li>
+<li>Short-circuit the loop (e.g., stop execution early or reroute it);</li>
+<li>Wrap the call itself to implement retries, logging, safety filters, etc.</li>
+</ul>
+<p>Under the hood, each middleware interacts with an <code>AgentState</code> object (representing messages, context, tool results, etc.) and a <code>Runtime</code> (the current execution environment).</p>
+<p>In the context of LangChain, it can provide more flexibility to the rigid ReAct standard implementation, without the need to use LangGraph.</p>
+<p>LangChain currently divides the middleware stages logically in three main groups: node-style, wrap-style and convenience (with the last one as of today just providing dynamic prompting capabilities).</p>
+<h4>Node style</h4>
+<p>These Middlewares run at distinct phases of execution:</p>
+<ul>
+<li><code>before_agent</code>: triggered <strong>once</strong> before the agent starts, useful for initialization or context setup (like retrieveing long-term memory from a remote database);</li>
+<li><code>before_model</code>: runs <strong>before every model call</strong>, often used for logging, prompt modification, or memory injection;</li>
+<li><code>after_model</code>: runs <strong>after each model response</strong>, useful for validation, output transformation, or tracing;</li>
+<li><code>after_agent</code>: triggered <strong>once</strong> after the agent completes, typically for cleanup, analytics, or result aggregation.</li>
+</ul>
+<h4>Wrap-style</h4>
+<p>They let you <strong>intercept and control</strong> the actual function call. These are like "around" hooks:</p>
+<ul>
+<li><code>wrap_model_call</code>: wraps the model invocation itself: ideal for implementing retries, fallback models, or latency measurement.</li>
+<li><code>wrap_tool_call</code>: wraps the execution of each tool: useful for monitoring, error handling, or enforcing rate limits.</li>
+</ul>
+<h3>Implementation: decorators or classes</h3>
+<h4>The decorator approach: simplicity first</h4>
+<p>For quick, self-contained middlewares (like logging or validation), LangChain provides decorator-style hooks.</p>
+<p>Let's start with a minimal example: logging before and after the model call.</p>
+<pre><code class="language-python">from langchain.agents.middleware import before_model, after_model
+from langchain.agents import create_agent
+
+@before_model
+def log_before_model(state, runtime):
+    print(f&quot;About to call model with {len(state['messages'])} messages&quot;)
+    return None
+
+@after_model
+def log_after_model(state, runtime):
+    last_msg = state[&quot;messages&quot;][-1]
+    print(f&quot;Model replied: {last_msg.content[:60]}...&quot;)
+    return None
+
+agent = create_agent(
+    model=&quot;gpt-4o&quot;,
+    tools=[],
+    middleware=[log_before_model, log_after_model],
+)
+</code></pre>
+<p>This middleware simply <em>observes</em> the state and it does not alter it.</p>
+<p>Each decorator function receives:</p>
+<ul>
+<li><code>state</code>: a dictionary-like object holding the agent's current messages, tools, and metadata;</li>
+<li><code>runtime</code>: the LangChain runtime (similar to an execution context).</li>
+</ul>
+<p>The function can either return:</p>
+<ul>
+<li><code>None</code>, meaning "continue as usual";</li>
+<li>a <strong>partial state update</strong>, which merges into the agent's current state, altering its behavior.</li>
+</ul>
+<p>For instance, you could use <code>before_model</code> to inject additional messages (like a system prompt or retrieved context).</p>
+<h4>The class approach: structure and reusability</h4>
+<p>As your project grows, you might want to bundle multiple hooks together, for example a logger that tracks before/after both <em>model</em> and <em>tool</em> calls, or structure it in a modular and robust way, reusing middlewares across agents.</p>
+<p>That's where the <strong>class-based</strong> middleware pattern shines.</p>
+<pre><code class="language-python">from langchain.agents.middleware import AgentMiddleware, AgentState
+from langgraph.runtime import Runtime
+
+class LoggingMiddleware(AgentMiddleware):
+    def before_model(self, state: AgentState, runtime: Runtime):
+        print(f&quot;Before model: {len(state['messages'])} messages&quot;)
+        return None
+
+    def after_model(self, state: AgentState, runtime: Runtime):
+        print(f&quot;After model: {state['messages'][-1].content[:50]}&quot;)
+        return None
+
+    def wrap_tool_call(self, request, handler):
+        print(f&quot;Calling tool {request['tool_name']}&quot;)
+        result = handler(request)
+        print(f&quot;Tool {request['tool_name']} finished.&quot;)
+        return result
+</code></pre>
+<p>Here we're overriding multiple lifecycle hooks in one place, keeping related logic together. Class middlewares can also carry state, parameters, or configuration (for example, a retry counter or an external logger instance).</p>
+<h3>The ReAct pattern in comparison</h3>
+<p>Imagine we're building a ReAct-style agent (Reason + Act). The agent should:</p>
+<ul>
+<li>Load a user's previous conversation from a database before each reasoning step;</li>
+<li>Log every model call and tool invocation to the terminal.</li>
+</ul>
+<p>We'll implement this same logic twice: once with LangGraph and once with LangChain's new middleware feature.</p>
+<h4>The LangGraph way</h4>
+<p>LangGraph is built around the concept of a <strong>graph of nodes</strong>, each representing a step in your workflow: a model call, a memory retrieval, a tool invocation, or any Python function.</p>
+<p>Nodes are connected with <strong>edges</strong>, defining the control flow. A <strong>runtime</strong> executes the graph, passing the state between nodes.</p>
+<p>Here's a working example that achieves our "memory + logging" behavior using LangGraph:</p>
+<pre><code class="language-python">from langgraph.graph import Graph, END
+from langchain_openai import ChatOpenAI
+
+## --- Mock data and setup ---
+def load_history_from_db(user_id: str):
+    &quot;&quot;&quot;Simulate fetching conversation history for a user.&quot;&quot;&quot;
+    return [
+        {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Hi there!&quot;},
+        {&quot;role&quot;: &quot;assistant&quot;, &quot;content&quot;: &quot;Hello, how can I help you today?&quot;},
+    ]
+
+def log_event(event: str):
+    &quot;&quot;&quot;Simple logger for demonstration.&quot;&quot;&quot;
+    print(f&quot;[LOG] {event}&quot;)
+
+## --- Define nodes ---
+def load_memory_node(state: dict):
+    &quot;&quot;&quot;Prepend stored memory to messages.&quot;&quot;&quot;
+    user_id = state.get(&quot;user_id&quot;)
+    if user_id:
+        history = load_history_from_db(user_id)
+        state[&quot;messages&quot;] = history + state[&quot;messages&quot;]
+        log_event(f&quot;Loaded {len(history)} messages from DB for user {user_id}&quot;)
+    return state
+
+def model_node(state: dict):
+    &quot;&quot;&quot;Perform a model call using LangChain LLMs.&quot;&quot;&quot;
+    model = ChatOpenAI(model=&quot;gpt-4o-mini&quot;)
+    messages = state[&quot;messages&quot;]
+    log_event(f&quot;Calling model with {len(messages)} messages...&quot;)
+    response = model.invoke(messages)
+    log_event(f&quot;Model replied: {response.content[:50]}...&quot;)
+    state[&quot;messages&quot;].append({&quot;role&quot;: &quot;assistant&quot;, &quot;content&quot;: response.content})
+    return state
+
+def save_memory_node(state: dict):
+    &quot;&quot;&quot;Pretend to save memory back to DB (for completeness).&quot;&quot;&quot;
+    user_id = state.get(&quot;user_id&quot;)
+    log_event(f&quot;Saving {len(state['messages'])} messages to DB for {user_id}&quot;)
+    return state
+
+## --- Build the graph ---
+graph = Graph()
+graph.add_node(&quot;load_memory&quot;, load_memory_node)
+graph.add_node(&quot;model&quot;, model_node)
+graph.add_node(&quot;save_memory&quot;, save_memory_node)
+
+graph.set_entry_point(&quot;load_memory&quot;)
+graph.add_edge(&quot;load_memory&quot;, &quot;model&quot;)
+graph.add_edge(&quot;model&quot;, &quot;save_memory&quot;)
+graph.add_edge(&quot;save_memory&quot;, END)
+</code></pre>
+<p>What happens here:</p>
+<ul>
+<li>The runtime starts at the <strong>load_memory_node</strong>, which fetches stored chat history from a database;</li>
+<li>It passes the enriched state to the <strong>model_node</strong>, where an LLM call occurs;</li>
+<li>Finally, <strong>save_memory_node</strong> simulates persisting the conversation back to the database.</li>
+</ul>
+<p>This works but it requires defining three nodes, wiring edges, and managing a runtime. It's explicit, transparent, and scalable, but also verbose for simple (and repetitive) patterns like this one.</p>
+<h4>The LangChain + middleware way</h4>
+<p>Now let's achieve the <strong>exact same behavior</strong> using the new LangChain middleware API.</p>
+<p>Rather than defining a graph of nodes, we simply <strong>attach reusable middleware classes</strong> to an agent.</p>
+<pre><code class="language-python">from langchain.agents import create_react_agent
+from langchain.agents.middleware import AgentMiddleware, AgentState
+from langgraph.runtime import Runtime
+from langchain.tools import tool
+from langchain_openai import ChatOpenAI
+
+## --- Mock database ---
+def load_history_from_db(user_id: str):
+    return [
+        {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Hi there!&quot;},
+        {&quot;role&quot;: &quot;assistant&quot;, &quot;content&quot;: &quot;Hello, how can I help you today?&quot;},
+    ]
+
+## --- Define a simple tool ---
+@tool
+def get_weather(city: str) -&gt; str:
+    &quot;&quot;&quot;Fake weather tool.&quot;&quot;&quot;
+    return f&quot;The weather in {city} is sunny with 24°C.&quot;
+
+## --- Define middlewares ---
+class LoggingMiddleware(AgentMiddleware):
+    &quot;&quot;&quot;Logs before/after model and tool calls.&quot;&quot;&quot;
+
+    def before_model(self, state: AgentState, runtime: Runtime):
+        print(f&quot;[LOG] Before model call ({len(state['messages'])} messages)&quot;)
+        return None
+
+    def after_model(self, state: AgentState, runtime: Runtime):
+        last = state[&quot;messages&quot;][-1]
+        print(f&quot;[LOG] Model replied: {last.content[:60]}...&quot;)
+        return None
+
+    def wrap_tool_call(self, request, handler):
+        print(f&quot;[LOG] Invoking tool {request['tool_name']} with args {request['args']}&quot;)
+        result = handler(request)
+        print(f&quot;[LOG] Tool {request['tool_name']} finished.&quot;)
+        return result
+
+
+class DBMemoryMiddleware(AgentMiddleware):
+    &quot;&quot;&quot;Injects previous conversation history before each model call.&quot;&quot;&quot;
+
+    def before_model(self, state: AgentState, runtime: Runtime):
+        user_id = runtime.context.get(&quot;user_id&quot;)
+        if user_id:
+            history = load_history_from_db(user_id)
+            print(f&quot;[LOG] Loaded {len(history)} messages from DB for user {user_id}&quot;)
+            return {&quot;messages&quot;: history + state[&quot;messages&quot;]}
+        return None
+
+## --- Create and run the agent ---
+model = ChatOpenAI(model=&quot;gpt-4o-mini&quot;, temperature=0)
+agent = create_react_agent(
+    model=model,
+    tools=[get_weather],
+    middleware=[DBMemoryMiddleware(), LoggingMiddleware()],
+)
+</code></pre>
+<h4>Comparing the two approaches</h4>
+<p>The key difference between LangGraph and LangChain middlewares lies in the level of abstraction.</p>
+<p><strong>LangGraph</strong> focuses on <strong>explicit orchestration</strong>: you define every step as a node, wire them together, and let a runtime manage the flow. This is perfect for complex, multi-agent systems or workflows with branching logic, but it comes with more setup and boilerplate.</p>
+<p><strong>Middlewares</strong>, on the other hand, provide <strong>implicit orchestration</strong>. They plug directly into the agent's lifecycle, letting you inject behaviors like logging, caching, or memory loading with minimal code. The same functionality that needs multiple nodes in LangGraph can be expressed as a couple of lightweight middleware classes, which can then be reused for multiple agents.</p>
+<h3>My takeaways</h3>
+<p>In the end, both LangGraph and LangChain middlewares aim to bring order and reusability to AI systems, they just operate at different scales.</p>
+<ul>
+<li>
+<p><strong>Reach for LangGraph</strong> when you're orchestrating many agents, handling branching workflows, or need precise control over execution, concurrency, and state management. It's the right tool when your application starts behaving more like a system than a single agent.</p>
+</li>
+<li>
+<p><strong>Reach for LangChain middlewares</strong> when you want to standardize behaviors <em>inside</em> an agent: things like logging, monitoring, context injection, safety filters, or retry logic. They let you add structure and observability without overhead.</p>
+</li>
+</ul>
+<p><strong>And the real magic is in combining them.</strong> Use LangGraph to choreograph your overall flow, and use LangChain middlewares to ensure each node follows the same internal standards. Together, they give you a clean way to scale from simple building blocks to complex, coordinated systems.</p>
+<hr />
+<p><em>This post is not meant to provide definitive answers or prescriptive guidance. Its goal is to spark reflections and discussions on the topic.</em></p>
+<p><em>The views expressed are my own.</em></p>
+<hr />
+<p><strong>Tags:</strong> AI, AI Agent, Langchain, Python, Software Development</p>
+  </main>
+
+  <footer class="article-footer">
+    <div class="container">
+      <div class="article-footer-inner">
+        <div class="article-footer-tags">
+          <span class="label">Tags</span>
+          <span class="tag-static">AI</span> <span class="tag-static">AI Agent</span> <span class="tag-static">LangChain</span> <span class="tag-static">Python</span>
+        </div>
+        <a class="back-link" href="../../">← All articles</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+</body>
+</html>

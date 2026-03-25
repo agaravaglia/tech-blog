@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="60.0 -4.0 1058.9 627.4" width="1059" height="627">
+<defs>
+  <style>
+    @font-face {
+      font-family: 'Virgil';
+      src: url('https://excalidraw.com/Virgil.woff2');
+    }
+    @font-face {
+      font-family: 'Cascadia';
+      src: url('https://excalidraw.com/Cascadia.woff2');
+    }
+    @font-face {
+      font-family: 'Assistant';
+      src: url('https://fonts.gstatic.com/s/assistant/v19/2sDcZGJYnIjSi6H75xkZZE1I0yCmYzzUtuZZEA.woff2');
+    }
+  </style>
+</defs>
+<rect x="60.0" y="-4.0" width="1058.9" height="627.4" fill="#ffffff" />
+<text x="563.43" y="43.96" font-size="28" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">SHAPLEY VALUES: FEATURES AS TEAM PLAYERS</text>
+<ellipse cx="115.0" cy="115.0" rx="35.0" ry="35.0" fill="#ffc9c9" stroke="#e03131" stroke-width="2"  opacity="1.0" />
+<text x="115.00" y="120.00" font-size="20" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">P1</text>
+<text x="170.00" y="117.84" font-size="18" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="start" opacity="1.0">Credit Score</text>
+<path d="M 369.48,109.12 L 569.48,109.12" fill="none" stroke="#e03131" stroke-width="2"  />
+<polygon points="569.48,109.12 559.48,113.12 559.48,105.12" fill="#e03131" />
+<text x="587.77" y="114.21" font-size="18" font-family="Virgil, Arial, sans-serif" fill="#e03131" text-anchor="start" opacity="1.0">+0.35</text>
+<ellipse cx="115.0" cy="205.0" rx="35.0" ry="35.0" fill="#ffc9c9" stroke="#e03131" stroke-width="2"  opacity="1.0" />
+<text x="115.00" y="210.00" font-size="20" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">P2</text>
+<text x="170.00" y="208.00" font-size="18" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="start" opacity="1.0">Income</text>
+<path d="M 389.48,199.12 L 569.48,199.12" fill="none" stroke="#e03131" stroke-width="2"  />
+<polygon points="569.48,199.12 559.48,203.12 559.48,195.12" fill="#e03131" />
+<text x="587.77" y="207.20" font-size="18" font-family="Virgil, Arial, sans-serif" fill="#e03131" text-anchor="start" opacity="1.0">+0.20</text>
+<ellipse cx="115.0" cy="295.1171875" rx="35.0" ry="35.0" fill="#a5d8ff" stroke="#1971c2" stroke-width="2"  opacity="1.0" />
+<text x="115.00" y="299.88" font-size="20" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">P3</text>
+<text x="170.00" y="298.00" font-size="18" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="start" opacity="1.0">Debt Ratio</text>
+<path d="M 792.14,289.24 L 652.14,289.24" fill="none" stroke="#1971c2" stroke-width="2"  />
+<polygon points="652.14,289.24 662.14,285.24 662.14,293.24" fill="#1971c2" />
+<text x="587.65" y="293.29" font-size="18" font-family="Virgil, Arial, sans-serif" fill="#1971c2" text-anchor="start" opacity="1.0">-0.25</text>
+<ellipse cx="115.0" cy="385.0" rx="35.0" ry="35.0" fill="#ffc9c9" stroke="#e03131" stroke-width="2"  opacity="1.0" />
+<text x="115.00" y="390.00" font-size="20" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">P4</text>
+<text x="170.00" y="388.00" font-size="18" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="start" opacity="1.0">Payment History</text>
+<path d="M 429.48,379.12 L 569.48,379.12" fill="none" stroke="#e03131" stroke-width="2"  />
+<polygon points="569.48,379.12 559.48,383.12 559.48,375.12" fill="#e03131" />
+<text x="587.77" y="384.21" font-size="18" font-family="Virgil, Arial, sans-serif" fill="#e03131" text-anchor="start" opacity="1.0">+0.15</text>
+<ellipse cx="115.0" cy="475.1171875" rx="35.0" ry="35.0" fill="#a5d8ff" stroke="#1971c2" stroke-width="2"  opacity="1.0" />
+<text x="115.00" y="480.00" font-size="20" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">P5</text>
+<text x="170.00" y="478.00" font-size="18" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="start" opacity="1.0">Recent Inquiries</text>
+<path d="M 752.14,464.51 L 652.14,464.51" fill="none" stroke="#1971c2" stroke-width="2"  />
+<polygon points="652.14,464.51 662.14,460.51 662.14,468.51" fill="#1971c2" />
+<text x="585.87" y="473.31" font-size="18" font-family="Virgil, Arial, sans-serif" fill="#1971c2" text-anchor="start" opacity="1.0">-0.10</text>
+<rect x="938.9326233860993" y="182.41822382318475" width="160" height="180" rx="16" ry="16" fill="#b2f2bb" stroke="#2f9e44" stroke-width="2"  opacity="1.0" />
+<text x="1018.93" y="246.42" font-size="24" font-family="Virgil, Arial, sans-serif" fill="#1e1e1e" text-anchor="middle" opacity="1.0">Final</text>
+<text x="1018.93" y="261.42" font-size="24" font-family="Virgil, Arial, sans-serif" fill="#1e1e1e" text-anchor="middle" opacity="1.0">Prediction</text>
+<text x="1018.93" y="338.42" font-size="36" font-family="Virgil, Arial, sans-serif" fill="#1e1e1e" text-anchor="middle" opacity="1.0">0.72</text>
+<path d="M 878.93,272.42 L 928.93,272.42" fill="none" stroke="#000000" stroke-width="1" stroke-dasharray="8 4" />
+<polygon points="928.93,272.42 918.93,276.42 918.93,268.42" fill="#000000" />
+<text x="571.25" y="557.71" font-size="21.49643340527633" font-family="Virgil, Arial, sans-serif" fill="#868e96" text-anchor="middle" opacity="1.0">Each feature contributes to the final prediction.</text>
+<text x="571.25" y="591.30" font-size="21.49643340527633" font-family="Virgil, Arial, sans-serif" fill="#868e96" text-anchor="middle" opacity="1.0">Shapley values measure fair contribution.</text>
+<rect x="340.0981427724734" y="74.39341736910455" width="535.4609962026344" height="433.4951462108844" rx="0" ry="0" fill="none" stroke="#1e1e1e" stroke-width="1" stroke-dasharray="10 5" opacity="1.0" />
+</svg>

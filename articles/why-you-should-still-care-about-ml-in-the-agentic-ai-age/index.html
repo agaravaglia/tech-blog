@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Classical ML provides the structured decision signals that LLMs cannot. As agents scale, MLOps becomes the foundation that keeps them trustworthy." />
+  <title>Why you should still care about ML in the Agentic AI age — Alessandro Garavaglia</title>
+  <link rel="stylesheet" href="../../assets/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
+</head>
+<body class="article-page">
+
+  <nav class="site-nav">
+    <div class="container">
+      <div class="site-nav-inner">
+        <a href="../../" class="site-nav-logo">Alessandro Garavaglia<span class="site-nav-dot"> · </span>Tech Blog</a>
+        <div class="site-nav-links">
+          <a href="https://github.com/agaravaglia" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://medium.com/@ale.garavaglia" target="_blank" rel="noopener">Medium</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="article-header">
+    <div class="container">
+      <a class="back-link" href="../../">← All articles</a>
+      <div class="article-meta">
+        <span class="badge badge-type">Explainer</span>
+        <span class="badge badge-difficulty">Beginner</span>
+        <time>July 03, 2025</time>
+      </div>
+    </div>
+  </header>
+
+  <main class="article-content container">
+    <div class="article-title-block">
+      <h1>Why you should still care about ML in the Agentic AI age</h1>
+      <p class="article-description">Classical ML provides the structured decision signals that LLMs cannot. As agents scale, MLOps becomes the foundation that keeps them trustworthy.</p>
+    </div>
+    <p><strong>Alessandro Garavaglia</strong> | 5 min read | Jul 3, 2025</p>
+<hr />
+<p>As AI gains traction in enterprise workflows, there is a growing assumption that LLMs can do it all. But when it comes to high-stakes, automated decision-making, classical machine learning remains essential to make the correct ones.</p>
+<h3>What are AI agents?</h3>
+<p>AI agents are autonomous systems designed to perceive their environment, reason about it, and act toward a defined goal. Unlike "simple" LLM applications, that are stochastic generators of text, agents are <strong>design to execute tasks or make decisions</strong>. They coordinate between various capabilities — language, logic, memory, and tools — to execute complex workflows.</p>
+<p>An AI agent typically comprises the following architectural components:</p>
+<ul>
+<li><strong>Perception Layer:</strong> Interfaces with APIs, sensors, databases, or real-time streams to collect data about the world or environment.</li>
+<li><strong>Memory Module:</strong> Stores contextual or task-specific information across time. This may include vector databases, structured stores, or simple in-memory state.</li>
+<li><strong>Reasoning &amp; Planning Engine:</strong> Determines the next best action using LLMs, rule-based systems, or symbolic planning.</li>
+<li><strong>Tools Integration Layer:</strong> Connects to external tools like Python interpreters, databases, search engines, or ML inference services.</li>
+<li><strong>Action Layer:</strong> Executes actions (for example API calls, code execution, web searches, document editing, ML inference) based on plans and given tools.</li>
+</ul>
+<p><img alt="Main components of an AI Agent" src="additional_files/01-agents.webp" /></p>
+<blockquote>
+<p><em>Agents are orchestrators, not just generators. They combine reasoning, tools, and external knowledge to achieve goals autonomously.</em></p>
+</blockquote>
+<p>There are many frameworks (like <strong>LangChain and CrewAI</strong>) that offer abstractions to compose these elements into modular, reusable agents. Things get more and more complicated by the day with <strong>Google's A2A</strong> or <strong>Anthropic's MCP</strong> protocols, but the basic components of a single AI Agent can be summarized as above.</p>
+<h3>How agents automate decision making</h3>
+<p>AI agents are rapidly transforming how workflows and processes can be automated. From triaging customer support tickets to managing infrastructure or generating financial reports, agents can perceive context, analyze data, and autonomously decide how to act.</p>
+<p>Yet, it's important to acknowledge a core limitation:</p>
+<blockquote>
+<p><em>LLMs are models that generate text according to statistical distributions, they are not decision engines.</em></p>
+</blockquote>
+<p>While they excel at interpreting and generating natural language, LLMs struggle with certain quantitative operations, like performing exact calculations, applying formal logic, or understanding structured business data (e.g., tables, time series). Also, they are not able to predict the future!</p>
+<p>To automate real-world decisions agents need <strong>structured predictive signals</strong>. That's where <strong>classical machine learning</strong> (classification models, regression models, time-series forecasters, clustering, etc...) comes in.</p>
+<h3>A use case: Churn reduction</h3>
+<p>Imagine a subscription-based business (like telcos, streaming services, LLMs APIs, etc...) looking to reduce churn. A customer success agent is tasked with identifying and retaining high-risk users.</p>
+<p><img alt="An example of Churn reduction AI Agent." src="additional_files/02-actions.webp" /></p>
+<p>The agent, given the request to analyze a customer and take action if the customer is at churn risk, will do the following:</p>
+<ul>
+<li>Query the customer database to retrieve the needed features;</li>
+<li>Query a <strong>churn prediction model</strong> (e.g., XGBoost or logistic regression) to assign a risk score to each customer.</li>
+<li>Given the business policy and the churn score, identify the correct customer journey to apply;</li>
+<li>Use an LLM to draft a personalized message in accordance with customer journey and customer features;</li>
+<li>Sends the message via email.</li>
+</ul>
+<p>In this workflow:</p>
+<ul>
+<li>The <strong>ML model provides the decision signal:</strong> Who is likely to churn?</li>
+<li>The <strong>LLM contextualizes communication:</strong> How do we speak to them?</li>
+<li>The <strong>agent orchestrates the process:</strong> When, where, and how do we act?</li>
+</ul>
+<h3>What happens when ML models fail?</h3>
+<p>Let's say the churn model performs badly (it's underperforming, overfitted, or misaligned with current business dynamics). It wrongly classifies a large cohort of loyal customers as at risk.</p>
+<p>Here's what could go wrong:</p>
+<ul>
+<li>The agent <strong>blasts thousands of unnecessary offers</strong>, eroding customer trust;</li>
+<li>Marketing teams spend budget on ineffective outreach;</li>
+<li>Customer service is overwhelmed by confused or annoyed responses;</li>
+<li>The business loses revenue and brand reputation through <strong>automated overcorrection</strong>.</li>
+</ul>
+<blockquote>
+<p><em>Agents scale impact. Errors of ML models are automatically propagated at scale by Agents decisions.</em></p>
+</blockquote>
+<p>Agents introduce automation, but also <strong>amplification</strong>. They don't just use ML outputs, but they act on them autonomously, at scale, and in production.</p>
+<p>This is why model performance isn't just a data science concern. It's an operational risk that can damage a company's finances and reputation.</p>
+<h3>MLOps is no longer optional</h3>
+<p>This is where <strong>MLOps (Machine Learning Operations)</strong> comes into play.</p>
+<p>MLOps is the engineering discipline focused on making ML models <strong>production-grade, robust, reproducible, and continuously monitored</strong>. It provides the scaffolding necessary to ensure that the predictive components of agents remain effective over time.</p>
+<p>In the context of AI agents, <strong>MLOps is the foundation that keeps their intelligence aligned, observable, and maintainable</strong>.</p>
+<p>Key MLOps capabilities are:</p>
+<ul>
+<li><strong>Model Registry &amp; Versioning:</strong> Track and manage models as products, so agents always use the right version;</li>
+<li><strong>Model Serving Infrastructure:</strong> Low-latency, scalable inference endpoints accessible as tools within agents;</li>
+<li><strong>Monitoring &amp; Drift Detection:</strong> Alert when models degrade due to data shifts or feedback loops;</li>
+<li><strong>Feedback Loops:</strong> Agents can log outcomes (e.g., success/failure) and trigger retraining pipelines;</li>
+<li><strong>Governance &amp; Auditability:</strong> Track what model made what prediction and when.</li>
+</ul>
+<blockquote>
+<p><em>MLOps turns ML models into reliable services. And reliable services make agents trustworthy decision makers.</em></p>
+</blockquote>
+<p>Many of the MLOps principles can be extended to <strong>agent workflows themselves</strong>:</p>
+<ul>
+<li>Versioning of agent policies, prompts or plans;</li>
+<li>CI/CD pipelines for testing agent logic;</li>
+<li>Telemetry to observe agent decisions and outcomes;</li>
+<li>Guardrails and fallback logic in case of unexpected behavior.</li>
+</ul>
+<p>As agents move from prototypes to production, <strong>treating them as composite systems with lifecycle management</strong> is no longer optional. It's the path to safe, scalable automation.</p>
+<h3>Conclusion</h3>
+<p>The rise of AI agents is a defining moment in automation. But this shift doesn't diminish the importance of classical machine learning.</p>
+<p>Classical ML remains the bridge between perception and action. It provides structured, data-driven signals that transform agents from reactive scripts into strategic actors.</p>
+<p>As agents scale across industries, the need for robust infrastructure, governance, and lifecycle management becomes even more urgent. In this new landscape, the synergy between LLMs, classical ML, and MLOps becomes a requirement.</p>
+<hr />
+<p><em>This post is not meant to provide definitive answers or prescriptive guidance. Its goal is to spark reflections and discussions on the topic.</em></p>
+<p><em>The views expressed are my own.</em></p>
+<hr />
+<p><strong>Tags:</strong> AI Agent, MLOps, Machine Learning</p>
+  </main>
+
+  <footer class="article-footer">
+    <div class="container">
+      <div class="article-footer-inner">
+        <div class="article-footer-tags">
+          <span class="label">Tags</span>
+          <span class="tag-static">AI</span> <span class="tag-static">AI Agent</span> <span class="tag-static">MLOps</span> <span class="tag-static">Machine Learning</span>
+        </div>
+        <a class="back-link" href="../../">← All articles</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+</body>
+</html>

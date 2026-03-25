@@ -1,0 +1,221 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="20.0 0.0 840.0 450.0" width="840" height="450">
+<defs>
+  <style>
+    @font-face {
+      font-family: 'Virgil';
+      src: url('https://excalidraw.com/Virgil.woff2');
+    }
+    @font-face {
+      font-family: 'Cascadia';
+      src: url('https://excalidraw.com/Cascadia.woff2');
+    }
+    @font-face {
+      font-family: 'Assistant';
+      src: url('https://fonts.gstatic.com/s/assistant/v19/2sDcZGJYnIjSi6H75xkZZE1I0yCmYzzUtuZZEA.woff2');
+    }
+  </style>
+</defs>
+<rect x="20.0" y="0.0" width="840.0" height="450.0" fill="#ffffff" />
+<rect x="40" y="60" width="380" height="368.9285888671875" rx="16" ry="16" fill="#f8f9fa" stroke="#868e96" stroke-width="2" stroke-dasharray="10 5" opacity="1.0" />
+<text x="228.73" y="41.30" font-size="20" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">SINGLE RECORD EXPLAINABILITY</text>
+<text x="230.00" y="91.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#e03131" text-anchor="middle" opacity="1.0">"Why was THIS customer rejected?"</text>
+<text x="180.00" y="119.00" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#868e96" text-anchor="start" opacity="1.0">f(x) = -2.563</text>
+<text x="60.00" y="159.00" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="start" opacity="1.0">credit_score</text>
+<rect x="164.0066814913908" y="140.00487078072888" width="120" height="30" rx="6" ry="6" fill="#339af0" stroke="#1971c2" stroke-width="2"  opacity="1.0" />
+<text x="294.01" y="159.00" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#1971c2" text-anchor="start" opacity="1.0">-2.01</text>
+<text x="60.00" y="199.00" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="start" opacity="1.0">debt_ratio</text>
+<rect x="286.64618298441246" y="180.15841035905947" width="50" height="30" rx="6" ry="6" fill="#ff6b6b" stroke="#e03131" stroke-width="2"  opacity="1.0" />
+<text x="345.75" y="198.51" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#e03131" text-anchor="start" opacity="1.0">+0.8</text>
+<text x="60.00" y="239.00" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="start" opacity="1.0">age</text>
+<rect x="261.07564389896106" y="222.3918990061839" width="20" height="30" rx="6" ry="6" fill="#339af0" stroke="#1971c2" stroke-width="2"  opacity="1.0" />
+<text x="217.58" y="241.40" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#1971c2" text-anchor="start" opacity="1.0">-0.21</text>
+<text x="60.00" y="279.00" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="start" opacity="1.0">num_accounts</text>
+<rect x="266.07564389896106" y="262.3918990061839" width="15" height="30" rx="6" ry="6" fill="#339af0" stroke="#1971c2" stroke-width="2"  opacity="1.0" />
+<text x="217.58" y="281.40" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#1971c2" text-anchor="start" opacity="1.0">-0.14</text>
+<text x="60.00" y="319.00" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="start" opacity="1.0">employment_years</text>
+<rect x="288.87605782647995" y="299.06141626574305" width="10" height="30" rx="5.0" ry="5.0" fill="#ff6b6b" stroke="#e03131" stroke-width="2"  opacity="1.0" />
+<text x="312.68" y="318.06" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#e03131" text-anchor="start" opacity="1.0">+0.07</text>
+<text x="281.80" y="418.22" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#868e96" text-anchor="middle" opacity="1.0">E[f(X)] = 0.554</text>
+<rect x="460" y="60" width="380" height="370" rx="16" ry="16" fill="#f8f9fa" stroke="#868e96" stroke-width="2" stroke-dasharray="10 5" opacity="1.0" />
+<text x="646.87" y="40.00" font-size="20" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">DATASET-LEVEL EXPLAINABILITY</text>
+<text x="650.00" y="91.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#1971c2" text-anchor="middle" opacity="1.0">"What features matter overall?"</text>
+<text x="540.42" y="422.00" font-size="12" font-family="Virgil, Arial, sans-serif" fill="#868e96" text-anchor="start" opacity="1.0">SHAP value (impact on model output)</text>
+<text x="793.29" y="204.39" font-size="12" font-family="Virgil, Arial, sans-serif" fill="#e03131" text-anchor="middle" opacity="1.0">High</text>
+<rect x="783.7438759862498" y="265.96560927484296" width="20" height="60" rx="0" ry="0" fill="#339af0" stroke="#868e96" stroke-width="1"  opacity="1.0" />
+<text x="793.58" y="343.69" font-size="12" font-family="Virgil, Arial, sans-serif" fill="#1971c2" text-anchor="middle" opacity="1.0">Low</text>
+<text x="791.49" y="159.72" font-size="11" font-family="Virgil, Arial, sans-serif" fill="#868e96" text-anchor="middle" opacity="1.0">Feature</text>
+<text x="791.49" y="179.72" font-size="11" font-family="Virgil, Arial, sans-serif" fill="#868e96" text-anchor="middle" opacity="1.0">value</text>
+<text x="480.00" y="130.00" font-size="13" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="start" opacity="1.0">credit_score</text>
+<ellipse cx="570.0" cy="125.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="577.0" cy="121.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="577.0" cy="129.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="585.0" cy="125.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="585.0" cy="119.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="585.0" cy="131.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="593.0" cy="122.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="593.0" cy="128.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="593.0" cy="117.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="600.0" cy="125.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="600.0" cy="131.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="607.0" cy="122.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="607.0" cy="129.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="615.0" cy="125.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="615.0" cy="119.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="623.0" cy="127.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="630.0" cy="123.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="630.0" cy="130.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="640.0" cy="125.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="647.0" cy="122.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="647.0" cy="129.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="655.0" cy="125.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="655.0" cy="131.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="662.0" cy="123.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="670.0" cy="125.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="677.0" cy="128.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="685.0" cy="123.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="695.0" cy="125.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="707.0" cy="127.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<text x="480.00" y="165.00" font-size="13" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="start" opacity="1.0">income</text>
+<ellipse cx="595.0" cy="160.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="603.0" cy="156.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="603.0" cy="164.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="610.0" cy="160.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="610.0" cy="154.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="617.0" cy="162.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="617.0" cy="156.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="625.0" cy="160.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="625.0" cy="166.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="633.0" cy="158.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="633.0" cy="164.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="640.0" cy="160.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="647.0" cy="157.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="647.0" cy="164.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="655.0" cy="160.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="655.0" cy="154.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="662.0" cy="162.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="662.0" cy="156.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="670.0" cy="160.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="670.0" cy="166.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="677.0" cy="158.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="685.0" cy="160.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="685.0" cy="165.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="693.0" cy="157.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="700.0" cy="160.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="710.0" cy="162.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<text x="480.00" y="200.00" font-size="13" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="start" opacity="1.0">debt_ratio</text>
+<ellipse cx="610.0" cy="195.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="617.0" cy="192.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="617.0" cy="199.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="625.0" cy="195.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="625.0" cy="189.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="632.0" cy="197.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="640.0" cy="195.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="640.0" cy="190.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="647.0" cy="198.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="647.0" cy="192.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="655.0" cy="195.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="655.0" cy="200.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="662.0" cy="193.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="662.0" cy="199.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="670.0" cy="195.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="670.0" cy="189.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="677.0" cy="197.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="677.0" cy="191.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="685.0" cy="195.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="693.0" cy="192.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="700.0" cy="196.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="710.0" cy="195.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<text x="480.00" y="235.00" font-size="13" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="start" opacity="1.0">payment_history</text>
+<ellipse cx="615.0" cy="230.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="623.0" cy="227.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="623.0" cy="234.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="630.0" cy="230.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="637.0" cy="226.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="637.0" cy="233.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="645.0" cy="230.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="645.0" cy="224.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="653.0" cy="232.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="653.0" cy="227.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="660.0" cy="230.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="660.0" cy="235.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="668.0" cy="228.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="668.0" cy="234.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="675.0" cy="230.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="675.0" cy="225.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="683.0" cy="232.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="690.0" cy="230.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="690.0" cy="226.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="700.0" cy="231.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="713.0" cy="230.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<text x="480.00" y="270.00" font-size="13" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="start" opacity="1.0">employment_years</text>
+<ellipse cx="605.0" cy="265.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="613.0" cy="262.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="620.0" cy="267.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="627.0" cy="265.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="635.0" cy="261.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="635.0" cy="268.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="643.0" cy="265.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="643.0" cy="260.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="650.0" cy="267.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="657.0" cy="265.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="657.0" cy="260.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="657.0" cy="270.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="665.0" cy="263.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="665.0" cy="269.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="673.0" cy="265.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="673.0" cy="271.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="680.0" cy="262.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="680.0" cy="269.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="687.0" cy="265.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="695.0" cy="263.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="703.0" cy="265.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="713.0" cy="266.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<text x="480.00" y="305.00" font-size="13" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="start" opacity="1.0">age</text>
+<ellipse cx="625.0" cy="300.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="632.0" cy="297.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="632.0" cy="304.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="640.0" cy="300.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="640.0" cy="295.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="647.0" cy="302.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="655.0" cy="300.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="655.0" cy="295.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="655.0" cy="305.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="662.0" cy="298.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="662.0" cy="304.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="670.0" cy="300.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="670.0" cy="306.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="677.0" cy="297.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="677.0" cy="303.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="685.0" cy="300.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="693.0" cy="298.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="700.0" cy="300.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<text x="480.00" y="340.00" font-size="13" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="start" opacity="1.0">recent_inquiries</text>
+<ellipse cx="635.0" cy="335.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="643.0" cy="332.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="643.0" cy="339.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="650.0" cy="335.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="650.0" cy="330.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="657.0" cy="337.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="657.0" cy="332.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="665.0" cy="335.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="665.0" cy="340.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="665.0" cy="330.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="673.0" cy="333.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="673.0" cy="339.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="680.0" cy="335.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="687.0" cy="337.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<text x="480.00" y="375.00" font-size="13" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="start" opacity="1.0">num_accounts</text>
+<ellipse cx="643.0" cy="370.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="650.0" cy="367.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="650.0" cy="374.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="657.0" cy="370.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="657.0" cy="365.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="665.0" cy="372.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="665.0" cy="367.0" rx="3.0" ry="3.0" fill="#ff6b6b" stroke="#e03131" stroke-width="1"  opacity="0.9" />
+<ellipse cx="673.0" cy="370.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="673.0" cy="375.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="680.0" cy="368.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="680.0" cy="373.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<ellipse cx="687.0" cy="370.0" rx="3.0" ry="3.0" fill="#339af0" stroke="#1971c2" stroke-width="1"  opacity="0.9" />
+<rect x="783.7438759862498" y="209.32912005930925" width="20" height="56.636489215533715" rx="0" ry="0" fill="#ff6b6b" stroke="#868e96" stroke-width="1"  opacity="1.0" />
+</svg>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Four SHAP explainer types, each optimized for different model architectures — choosing the right one can mean the difference between milliseconds and minutes in production." />
+  <title>SHAP Explainer Types: A Visual Guide — Alessandro Garavaglia</title>
+  <link rel="stylesheet" href="../../assets/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
+</head>
+<body class="article-page">
+
+  <nav class="site-nav">
+    <div class="container">
+      <div class="site-nav-inner">
+        <a href="../../" class="site-nav-logo">Alessandro Garavaglia<span class="site-nav-dot"> · </span>Tech Blog</a>
+        <div class="site-nav-links">
+          <a href="https://github.com/agaravaglia" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://medium.com/@ale.garavaglia" target="_blank" rel="noopener">Medium</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="article-header">
+    <div class="container">
+      <a class="back-link" href="../../">← All articles</a>
+      <div class="article-meta">
+        <span class="badge badge-type">Explainer</span>
+        <span class="badge badge-difficulty">Intermediate</span>
+        <time>March 10, 2026</time>
+      </div>
+      <div class="article-title-block">
+        <h1>SHAP Explainer Types: A Visual Guide</h1>
+        <p class="article-description">Four SHAP explainer types, each optimized for different model architectures — choosing the right one can mean the difference between milliseconds and minutes in production.</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="article-content container">
+
+    <p><strong>Alessandro Garavaglia</strong> | 7 min read | March 2026</p>
+
+    <hr>
+
+    <p>Most data scientists use SHAP with the default explainer and never think twice about it. You call <code>shap.Explainer(model)</code>, pass in your data, and get those satisfying waterfall plots. It works. But that convenience comes at a cost in compute time.</p>
+
+    <p>SHAP has four main explainer types, each optimized for different model architectures. Choosing the wrong one can mean waiting hours instead of seconds. I have seen production systems time out on explanation requests simply because the team used KernelExplainer on a gradient boosting model when TreeExplainer would have been 1000x faster.</p>
+
+    <p>Understanding which SHAP explainer to use makes explainability practical in production, whether you are debugging a single prediction or trying to understand your model's overall behavior.</p>
+
+    <hr>
+
+    <h3>Understanding SHAP and Shapley Values</h3>
+
+    <p>Before diving into explainer types, it helps to understand where SHAP values come from. The math has elegant foundations in game theory, but you do not need to memorize formulas to use it effectively.</p>
+
+    <h4>The game theory foundation</h4>
+
+    <p>Shapley values originated in cooperative game theory, introduced by Lloyd Shapley in 1953 (work that later earned him a Nobel Prize in Economics). The core idea answers a deceptively simple question: when a group of players work together to achieve some outcome, how do we fairly attribute credit to each player?</p>
+
+    <p>Here is a useful heuristic: imagine your features as players in a team game. Each player contributes to the final score (your model's prediction). Shapley values answer: "How much did each player fairly contribute to that score?"</p>
+
+    <p>To compute this fairly, we consider every possible combination of players and measure how adding each one changes the outcome. If a feature consistently improves predictions across many different combinations, it gets a high Shapley value. If it rarely makes a difference, its value approaches zero.</p>
+
+    <blockquote><p><em>The beauty of Shapley values is that they guarantee fairness properties: contributions sum to the total, symmetric players get equal credit, and irrelevant players get zero.</em></p></blockquote>
+
+    <img src="assets/01_game_theory_players.svg" alt="Features as players contributing to a prediction score" style="max-width:100%;margin:1.5rem 0;">
+
+    <h4>From Shapley to SHAP</h4>
+
+    <p>SHAP (<strong>SH</strong>apley <strong>A</strong>dditive ex<strong>P</strong>lanations) applies this game theory framework to machine learning model explanations. Scott Lundberg and Su-In Lee introduced it in 2017, and it has since become one of the most widely used explainability methods.</p>
+
+    <p>Each feature gets a SHAP value showing how much it pushed the prediction away from a baseline (typically the average prediction across your training data). Positive values mean the feature pushed the prediction higher; negative values mean it pushed lower.</p>
+
+    <p>When you see a waterfall plot, you are looking at exactly this: how each feature moved the prediction from baseline to final output.</p>
+
+    <img src="assets/02_simple_waterfall.svg" alt="Waterfall plot showing baseline to final prediction" style="max-width:100%;margin:1.5rem 0;">
+
+    <h4>Two levels of explainability</h4>
+
+    <p>One thing that often gets overlooked: SHAP operates at two different levels, and knowing which one you need changes how you use it.</p>
+
+    <p><strong>Single record level</strong> answers questions like "Why did THIS customer get rejected?" You are computing SHAP values for one specific prediction. This is essential for debugging individual cases, explaining decisions to customers, and regulatory compliance where you need to justify specific outcomes.</p>
+
+    <p><strong>Whole dataset level</strong> answers "What features matter most for my model overall?" Here you aggregate SHAP values across many predictions to reveal global patterns. Summary plots, dependence plots, and feature importance rankings all come from this aggregated view.</p>
+
+    <p>In my experience, teams often start with single-record explanations for debugging, then graduate to dataset-level analysis for model monitoring and stakeholder reporting.</p>
+
+    <img src="assets/03_single_vs_global.svg" alt="Single prediction vs. global summary comparison" style="max-width:100%;margin:1.5rem 0;">
+
+    <hr>
+
+    <h3>The four SHAP explainer types</h3>
+
+    <p>So why do multiple explainer implementations exist?</p>
+
+    <p>The challenge is computational. Computing exact Shapley values requires evaluating 2^n feature combinations, that is completely intractable for models with more than a handful of features. Each explainer type uses model-specific shortcuts to make this practical.</p>
+
+    <h4>TreeExplainer</h4>
+
+    <p>If you are working with XGBoost, LightGBM, RandomForest, or CatBoost, TreeExplainer is your first choice. It exploits the tree structure to compute exact SHAP values efficiently, typically in milliseconds even for models with hundreds of features.</p>
+
+    <p>The algorithm leverages how tree-based models make predictions through a series of splits. Rather than enumerating all possible feature combinations, it traces paths through the trees to calculate exact contributions.</p>
+
+    <pre><code class="language-python">import shap
+import xgboost as xgb
+
+# Train your model
+model = xgb.XGBClassifier()
+model.fit(X_train, y_train)
+
+# TreeExplainer computes exact SHAP values
+explainer = shap.TreeExplainer(model)
+shap_values = explainer.shap_values(X_test)</code></pre>
+
+    <h4>KernelExplainer</h4>
+
+    <p>KernelExplainer is the universal fallback: it works with any model that has a predict function. Custom ensembles, stacked models, models behind an API: if you can call predict, you can use KernelExplainer.</p>
+
+    <p>The tradeoff is speed. It uses weighted linear regression on sampled feature coalitions, which means it is approximating rather than computing exactly. For a model with 50 features, you might wait several minutes per prediction.</p>
+
+    <pre><code class="language-python"># Works with ANY model
+explainer = shap.KernelExplainer(model.predict, X_train[:100])
+shap_values = explainer.shap_values(X_test[:10])  # Subset for speed</code></pre>
+
+    <p>When specialized explainers do not apply, KernelExplainer is your safety net. Just budget extra compute time.</p>
+
+    <h4>DeepExplainer</h4>
+
+    <p>For neural networks built with TensorFlow, PyTorch, or Keras, DeepExplainer offers a middle ground. It combines DeepLIFT attribution with Shapley value properties, running faster than KernelExplainer while still handling the complexity of deep learning models.</p>
+
+    <p>One requirement: DeepExplainer needs a background dataset as a reference point for computing attributions. Typically you pass a sample of your training data.</p>
+
+    <pre><code class="language-python"># For neural networks
+explainer = shap.DeepExplainer(model, X_train[:100])
+shap_values = explainer.shap_values(X_test)</code></pre>
+
+    <h4>LinearExplainer</h4>
+
+    <p>For linear models (LinearRegression, LogisticRegression, Ridge, Lasso), LinearExplainer computes exact SHAP values analytically. It is the fastest of all explainers because the linear structure allows closed-form solutions.</p>
+
+    <p>An optional feature: you can account for correlation between features in your data. This matters when your features are not independent, as correlated features can obscure true contributions.</p>
+
+    <pre><code class="language-python"># For linear models - fastest option
+explainer = shap.LinearExplainer(model, X_train)
+shap_values = explainer.shap_values(X_test)</code></pre>
+
+    <hr>
+
+    <h3>What happens when you choose wrong</h3>
+
+    <p>I have watched teams abandon explainability entirely because "it is too slow." Often the problem was simply using the wrong explainer.</p>
+
+    <h4>The performance trap</h4>
+
+    <p>Here is a scenario I have seen multiple times: a team builds an XGBoost model with 50 features. They use <code>shap.Explainer()</code> which auto-selects, but something goes wrong in the detection and it falls back to KernelExplainer.</p>
+
+    <p>Suddenly, generating explanations takes 10+ minutes per prediction instead of milliseconds. Production systems timeout. The explainability feature gets removed because "SHAP does not scale."</p>
+
+    <p>The fix would have taken one line: explicitly specify TreeExplainer.</p>
+
+    <h4>The accuracy trap</h4>
+
+    <p>Speed is not the only concern. Some explainers compute exact Shapley values; others approximate.</p>
+
+    <p>TreeExplainer and LinearExplainer give you exact values for their respective model types. DeepExplainer and KernelExplainer approximate. Using an approximate explainer when an exact one exists means accepting unnecessary error that could lead you to wrong conclusions about feature importance.</p>
+
+    <blockquote><p><em>The fastest explanation is one that never gets computed because the team gave up waiting. But the most dangerous explanation is one that is computed fast but wrong.</em></p></blockquote>
+
+    <hr>
+
+    <h3>Closing thoughts</h3>
+
+    <p>SHAP has become a standard tool for model explainability, but the choice of explainer type often gets overlooked. Matching your explainer to your model architecture can mean the difference between milliseconds and minutes, between exact values and approximations.</p>
+
+    <p>A few practical takeaways:</p>
+
+    <ul>
+      <li><strong>TreeExplainer</strong> should be your default for any gradient boosting or random forest model</li>
+      <li><strong>KernelExplainer</strong> is the universal fallback, but budget compute time accordingly</li>
+      <li>Remember both use cases: single predictions for debugging, aggregated views for model understanding</li>
+      <li>When in doubt, specify the explainer explicitly rather than relying on auto-detection</li>
+    </ul>
+
+    <p>If you have production SHAP code, it might be worth checking which explainer is actually running. The fix is usually one line, but the performance improvement can be substantial.</p>
+
+    <hr>
+
+    <p><em>This post is not meant to provide definitive answers or prescriptive guidance. Its goal is to spark reflections and discussions on the topic.</em></p>
+
+    <p><em>The views expressed are my own.</em></p>
+
+  </main>
+
+  <footer class="article-footer">
+    <div class="container">
+      <div class="article-footer-inner">
+        <div class="article-footer-tags">
+          <span class="label">Tags</span>
+          <span class="tag-static">Machine Learning</span>
+          <span class="tag-static">SHAP</span>
+          <span class="tag-static">Explainability</span>
+          <span class="tag-static">XAI</span>
+          <span class="tag-static">Data Science</span>
+        </div>
+        <a class="back-link" href="../../">← All articles</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+</body>
+</html>

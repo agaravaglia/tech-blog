@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="20.0 16.0 740.0 566.0" width="740" height="566">
+<defs>
+  <style>
+    @font-face {
+      font-family: 'Virgil';
+      src: url('https://excalidraw.com/Virgil.woff2');
+    }
+    @font-face {
+      font-family: 'Cascadia';
+      src: url('https://excalidraw.com/Cascadia.woff2');
+    }
+    @font-face {
+      font-family: 'Assistant';
+      src: url('https://fonts.gstatic.com/s/assistant/v19/2sDcZGJYnIjSi6H75xkZZE1I0yCmYzzUtuZZEA.woff2');
+    }
+  </style>
+</defs>
+<rect x="20.0" y="16.0" width="740.0" height="566.0" fill="#ffffff" />
+<text x="390.00" y="62.00" font-size="26" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">THE OBSERVABILITY PROBLEM</text>
+<rect x="40" y="90" width="700" height="160" rx="32" ry="32" fill="#ebfbee" stroke="#2f9e44" stroke-width="2" stroke-dasharray="10 5" opacity="1.0" />
+<text x="60.00" y="118.00" font-size="15" font-family="Virgil, Arial, sans-serif" fill="#2f9e44" text-anchor="start" opacity="1.0">MONITORING A MODEL CALL</text>
+<rect x="130" y="132" width="100" height="55" rx="27.5" ry="27.5" fill="#a5d8ff" stroke="#1971c2" stroke-width="2"  opacity="1.0" />
+<text x="180.00" y="166.00" font-size="15" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">INPUT</text>
+<path d="M 230.00,159.00 L 290.00,159.00" fill="none" stroke="#000000" stroke-width="2"  />
+<polygon points="290.00,159.00 280.00,163.00 280.00,155.00" fill="#000000" />
+<rect x="290" y="132" width="120" height="55" rx="27.5" ry="27.5" fill="#b2f2bb" stroke="#2f9e44" stroke-width="3"  opacity="1.0" />
+<text x="350.00" y="166.00" font-size="15" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">MODEL</text>
+<path d="M 410.00,159.00 L 470.00,159.00" fill="none" stroke="#000000" stroke-width="2"  />
+<polygon points="470.00,159.00 460.00,163.00 460.00,155.00" fill="#000000" />
+<rect x="470" y="132" width="100" height="55" rx="27.5" ry="27.5" fill="#a5d8ff" stroke="#1971c2" stroke-width="2"  opacity="1.0" />
+<text x="520.00" y="166.00" font-size="15" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">OUTPUT</text>
+<text x="350.00" y="209.00" font-size="13" font-family="Virgil, Arial, sans-serif" fill="#2f9e44" text-anchor="middle" opacity="1.0">✓ one monitoring point</text>
+<rect x="40" y="300" width="700" height="210" rx="32" ry="32" fill="#fff9db" stroke="#f08c00" stroke-width="2" stroke-dasharray="10 5" opacity="1.0" />
+<text x="60.00" y="328.00" font-size="15" font-family="Virgil, Arial, sans-serif" fill="#f08c00" text-anchor="start" opacity="1.0">AGENT CHAIN</text>
+<rect x="65" y="350" width="130" height="60" rx="30.0" ry="30.0" fill="#ffec99" stroke="#f08c00" stroke-width="2"  opacity="1.0" />
+<text x="130.00" y="386.00" font-size="15" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">RETRIEVE</text>
+<path d="M 195.00,380.00 L 225.00,380.00" fill="none" stroke="#000000" stroke-width="2"  />
+<polygon points="225.00,380.00 215.00,384.00 215.00,376.00" fill="#000000" />
+<rect x="225" y="350" width="130" height="60" rx="30.0" ry="30.0" fill="#a5d8ff" stroke="#1971c2" stroke-width="2"  opacity="1.0" />
+<text x="290.00" y="378.00" font-size="15" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">MODEL</text>
+<text x="290.00" y="396.75" font-size="15" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">CALL</text>
+<path d="M 355.00,380.00 L 385.00,380.00" fill="none" stroke="#000000" stroke-width="2"  />
+<polygon points="385.00,380.00 375.00,384.00 375.00,376.00" fill="#000000" />
+<rect x="385" y="350" width="130" height="60" rx="30.0" ry="30.0" fill="#e9ecef" stroke="#868e96" stroke-width="2"  opacity="1.0" />
+<text x="450.00" y="386.00" font-size="15" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">TOOL</text>
+<path d="M 515.00,380.00 L 545.00,380.00" fill="none" stroke="#000000" stroke-width="2"  />
+<polygon points="545.00,380.00 535.00,384.00 535.00,376.00" fill="#000000" />
+<rect x="545" y="350" width="130" height="60" rx="30.0" ry="30.0" fill="#a5d8ff" stroke="#1971c2" stroke-width="2"  opacity="1.0" />
+<text x="610.00" y="386.00" font-size="15" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">OUTPUT</text>
+<text x="130.00" y="440.00" font-size="20" font-family="Virgil, Arial, sans-serif" fill="#e03131" text-anchor="middle" opacity="1.0">?</text>
+<text x="290.00" y="440.00" font-size="20" font-family="Virgil, Arial, sans-serif" fill="#e03131" text-anchor="middle" opacity="1.0">?</text>
+<text x="450.00" y="440.00" font-size="20" font-family="Virgil, Arial, sans-serif" fill="#e03131" text-anchor="middle" opacity="1.0">?</text>
+<text x="390.00" y="478.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#e03131" text-anchor="middle" opacity="1.0">which step failed?</text>
+<text x="390.00" y="556.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#2f9e44" text-anchor="middle" opacity="1.0">Tracing a chain is different from monitoring a model</text>
+</svg>
