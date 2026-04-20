@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5 -2.1 867.9 622.1" width="868" height="622">
+<defs>
+  <style>
+    @font-face {
+      font-family: 'Virgil';
+      src: url('https://excalidraw.com/Virgil.woff2');
+    }
+    @font-face {
+      font-family: 'Cascadia';
+      src: url('https://excalidraw.com/Cascadia.woff2');
+    }
+    @font-face {
+      font-family: 'Assistant';
+      src: url('https://fonts.gstatic.com/s/assistant/v19/2sDcZGJYnIjSi6H75xkZZE1I0yCmYzzUtuZZEA.woff2');
+    }
+  </style>
+</defs>
+<rect x="2.5" y="-2.1" width="867.9" height="622.1" fill="#ffffff" />
+<text x="436.47" y="41.87" font-size="24" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">TREEEXPLAINER ON GRADIENTBOOSTING: EXACT SHAP VALUES</text>
+<text x="450.00" y="73.00" font-size="18" font-family="Virgil, Arial, sans-serif" fill="#868e96" text-anchor="middle" opacity="1.0">f(x) = -0.467</text>
+<text x="240.00" y="121.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="end" opacity="1.0">68 = age</text>
+<rect x="300" y="100" width="150" height="40" rx="8" ry="8" fill="#339af0" stroke="#1971c2" stroke-width="2"  opacity="1.0" />
+<text x="380.00" y="126.00" font-size="18" font-family="Virgil, Arial, sans-serif" fill="#ffffff" text-anchor="middle" opacity="1.0">-0.54</text>
+<text x="240.00" y="176.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="end" opacity="1.0">0.563 = debt_ratio</text>
+<rect x="320" y="155" width="130" height="40" rx="8" ry="8" fill="#ff6b6b" stroke="#e03131" stroke-width="2"  opacity="1.0" />
+<text x="390.00" y="181.00" font-size="18" font-family="Virgil, Arial, sans-serif" fill="#ffffff" text-anchor="middle" opacity="1.0">-0.51</text>
+<text x="240.00" y="231.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="end" opacity="1.0">692.405 = credit_score</text>
+<rect x="450" y="210" width="130" height="40" rx="8" ry="8" fill="#ff6b6b" stroke="#e03131" stroke-width="2"  opacity="1.0" />
+<text x="520.00" y="236.00" font-size="18" font-family="Virgil, Arial, sans-serif" fill="#ffffff" text-anchor="middle" opacity="1.0">+0.5</text>
+<text x="240.00" y="286.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="end" opacity="1.0">0.366 = employment_years</text>
+<rect x="330" y="265" width="120" height="40" rx="8" ry="8" fill="#339af0" stroke="#1971c2" stroke-width="2"  opacity="1.0" />
+<text x="395.00" y="291.00" font-size="18" font-family="Virgil, Arial, sans-serif" fill="#ffffff" text-anchor="middle" opacity="1.0">-0.45</text>
+<text x="240.00" y="341.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="end" opacity="1.0">26498.948 = income</text>
+<rect x="450" y="320" width="100" height="40" rx="8" ry="8" fill="#339af0" stroke="#1971c2" stroke-width="2"  opacity="1.0" />
+<text x="510.00" y="346.00" font-size="18" font-family="Virgil, Arial, sans-serif" fill="#ffffff" text-anchor="middle" opacity="1.0">-0.39</text>
+<text x="240.00" y="396.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="end" opacity="1.0">0 = recent_inquiries</text>
+<rect x="450" y="375" width="80" height="40" rx="8" ry="8" fill="#ff6b6b" stroke="#e03131" stroke-width="2"  opacity="1.0" />
+<text x="500.00" y="401.00" font-size="18" font-family="Virgil, Arial, sans-serif" fill="#ffffff" text-anchor="middle" opacity="1.0">+0.29</text>
+<text x="240.00" y="451.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="end" opacity="1.0">2 = num_accounts</text>
+<rect x="450" y="430" width="40" height="40" rx="8" ry="8" fill="#ff6b6b" stroke="#e03131" stroke-width="2"  opacity="1.0" />
+<text x="500.00" y="461.00" font-size="18" font-family="Virgil, Arial, sans-serif" fill="#e03131" text-anchor="start" opacity="1.0">+0.12</text>
+<text x="240.00" y="506.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="end" opacity="1.0">0.841 = payment_history</text>
+<rect x="440" y="485" width="10" height="40" rx="4" ry="4" fill="#339af0" stroke="#1971c2" stroke-width="2"  opacity="1.0" />
+<text x="381.20" y="511.27" font-size="18" font-family="Virgil, Arial, sans-serif" fill="#1971c2" text-anchor="start" opacity="1.0">-0.04</text>
+<text x="420.00" y="559.00" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#868e96" text-anchor="start" opacity="1.0">E[f(X)] = 0.554</text>
+<text x="441.41" y="591.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#e03131" text-anchor="middle" opacity="1.0">TreeExplainer computes exact Shapley values by exploiting tree structure</text>
+<rect x="620" y="100" width="25" height="25" rx="0" ry="0" fill="#339af0" stroke="#1971c2" stroke-width="2"  opacity="1.0" />
+<text x="655.00" y="116.00" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="start" opacity="1.0">Negative</text>
+<rect x="620" y="135" width="25" height="25" rx="0" ry="0" fill="#ff6b6b" stroke="#e03131" stroke-width="2"  opacity="1.0" />
+<text x="655.00" y="151.00" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="start" opacity="1.0">Positive</text>
+</svg>

@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-9.0 60.0 1149.0 704.0" width="1149" height="704">
+<defs>
+  <style>
+    @font-face {
+      font-family: 'Virgil';
+      src: url('https://excalidraw.com/Virgil.woff2');
+    }
+    @font-face {
+      font-family: 'Cascadia';
+      src: url('https://excalidraw.com/Cascadia.woff2');
+    }
+    @font-face {
+      font-family: 'Assistant';
+      src: url('https://fonts.gstatic.com/s/assistant/v19/2sDcZGJYnIjSi6H75xkZZE1I0yCmYzzUtuZZEA.woff2');
+    }
+  </style>
+</defs>
+<rect x="-9.0" y="60.0" width="1149.0" height="704.0" fill="#ffffff" />
+<rect x="11" y="195" width="140" height="80" rx="32" ry="32" fill="#ffec99" stroke="#f08c00" stroke-width="2"  opacity="1.0" />
+<text x="81.00" y="244.00" font-size="24" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">USER</text>
+<rect x="210" y="80" width="370" height="600" rx="32" ry="32" fill="#ebfbee" stroke="#2f9e44" stroke-width="2" stroke-dasharray="10 5" opacity="1.0" />
+<text x="395.00" y="112.00" font-size="18" font-family="Virgil, Arial, sans-serif" fill="#2f9e44" text-anchor="middle" opacity="1.0">DOCKER COMPOSE</text>
+<rect x="250" y="135" width="290" height="210" rx="32" ry="32" fill="#a5d8ff" stroke="#1971c2" stroke-width="2"  opacity="1.0" />
+<text x="395.00" y="177.00" font-size="22" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">FASTAPI SERVICE</text>
+<text x="395.00" y="216.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#1971c2" text-anchor="middle" opacity="1.0">/chat</text>
+<text x="395.00" y="252.67" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#1971c2" text-anchor="middle" opacity="1.0">/stats</text>
+<text x="395.00" y="289.33" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#1971c2" text-anchor="middle" opacity="1.0">/cache/clear</text>
+<rect x="250" y="425" width="290" height="220" rx="32" ry="32" fill="#a5d8ff" stroke="#1971c2" stroke-width="2"  opacity="1.0" />
+<text x="395.00" y="467.00" font-size="22" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">REDIS STACK</text>
+<text x="395.00" y="504.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#1971c2" text-anchor="middle" opacity="1.0">query embeddings</text>
+<text x="395.00" y="544.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#1971c2" text-anchor="middle" opacity="1.0">+ cached responses</text>
+<text x="395.00" y="584.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#1971c2" text-anchor="middle" opacity="1.0">TTL: 1 hour</text>
+<rect x="670" y="80" width="410" height="600" rx="32" ry="32" fill="#fff9db" stroke="#f08c00" stroke-width="2" stroke-dasharray="10 5" opacity="1.0" />
+<text x="875.00" y="112.00" font-size="18" font-family="Virgil, Arial, sans-serif" fill="#f08c00" text-anchor="middle" opacity="1.0">DATABRICKS (external API)</text>
+<rect x="710" y="135" width="330" height="210" rx="32" ry="32" fill="#ffec99" stroke="#f08c00" stroke-width="2"  opacity="1.0" />
+<text x="875.00" y="177.00" font-size="22" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">BGE LARGE EN</text>
+<text x="875.00" y="214.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#f08c00" text-anchor="middle" opacity="1.0">embedding model</text>
+<text x="875.00" y="250.67" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#f08c00" text-anchor="middle" opacity="1.0">1024-dim vectors</text>
+<text x="875.00" y="287.33" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#f08c00" text-anchor="middle" opacity="1.0">called on every query</text>
+<rect x="710" y="425" width="330" height="220" rx="32" ry="32" fill="#ffec99" stroke="#f08c00" stroke-width="2"  opacity="1.0" />
+<text x="875.00" y="467.00" font-size="22" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">META LLAMA 3.3 70B</text>
+<text x="875.00" y="504.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#f08c00" text-anchor="middle" opacity="1.0">LLM inference</text>
+<text x="875.00" y="544.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#f08c00" text-anchor="middle" opacity="1.0">cache miss only</text>
+<text x="875.00" y="584.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#f08c00" text-anchor="middle" opacity="1.0">~2,200ms avg</text>
+<path d="M 160.00,243.00 L 250.00,240.00" fill="none" stroke="#000000" stroke-width="2"  />
+<polygon points="250.00,240.00 240.14,244.33 239.87,236.34" fill="#000000" />
+<text x="178.71" y="196.29" font-size="15" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">query</text>
+<path d="M 540.00,210.00 L 710.00,210.00" fill="none" stroke="#000000" stroke-width="2"  />
+<polygon points="710.00,210.00 700.00,214.00 700.00,206.00" fill="#000000" />
+<polygon points="540.00,210.00 550.00,206.00 550.00,214.00" fill="#000000" />
+<text x="625.00" y="197.00" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">embed query (always)</text>
+<path d="M 360.00,345.00 L 360.00,425.00" fill="none" stroke="#000000" stroke-width="2"  />
+<polygon points="360.00,425.00 356.00,415.00 364.00,415.00" fill="#000000" />
+<text x="350.00" y="391.00" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="end" opacity="1.0">similarity search</text>
+<path d="M 430.00,425.00 L 430.00,345.00" fill="none" stroke="#2f9e44" stroke-width="2"  />
+<polygon points="430.00,345.00 434.00,355.00 426.00,355.00" fill="#2f9e44" />
+<text x="435.00" y="388.00" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#2f9e44" text-anchor="start" opacity="1.0">HIT: cached response</text>
+<path d="M 547.14,513.57 L 701.43,511.43" fill="none" stroke="#e03131" stroke-width="2"  />
+<polygon points="701.43,511.43 691.49,515.57 691.37,507.57" fill="#e03131" />
+<text x="623.42" y="541.86" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#e03131" text-anchor="middle" opacity="1.0">MISS: </text>
+<text x="623.42" y="561.86" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#e03131" text-anchor="middle" opacity="1.0">call LLM</text>
+<path d="M 710.00,480.00 L 505.00,300.00" fill="none" stroke="#000000" stroke-width="2"  />
+<polygon points="505.00,300.00 515.15,303.59 509.88,309.60" fill="#000000" />
+<text x="690.14" y="378.29" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">response → store in Redis</text>
+<text x="570.00" y="736.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#2f9e44" text-anchor="middle" opacity="1.0">Two containers (Docker Compose) + two external Databricks endpoints. BGE runs on every query. Llama only on cache miss.</text>
+</svg>

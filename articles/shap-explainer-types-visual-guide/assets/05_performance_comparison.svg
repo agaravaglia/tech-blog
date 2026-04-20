@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="30.0 10.0 850.0 470.0" width="850" height="470">
+<defs>
+  <style>
+    @font-face {
+      font-family: 'Virgil';
+      src: url('https://excalidraw.com/Virgil.woff2');
+    }
+    @font-face {
+      font-family: 'Cascadia';
+      src: url('https://excalidraw.com/Cascadia.woff2');
+    }
+    @font-face {
+      font-family: 'Assistant';
+      src: url('https://fonts.gstatic.com/s/assistant/v19/2sDcZGJYnIjSi6H75xkZZE1I0yCmYzzUtuZZEA.woff2');
+    }
+  </style>
+</defs>
+<rect x="30.0" y="10.0" width="850.0" height="470.0" fill="#ffffff" />
+<text x="450.00" y="52.00" font-size="22" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">PERFORMANCE COMPARISON: TREEEXPLAINER VS KERNELEXPLAINER</text>
+<text x="450.00" y="83.00" font-size="18" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">Same XGBoost Model, Same Data</text>
+<text x="450.00" y="128.00" font-size="28" font-family="Virgil, Arial, sans-serif" fill="#e03131" text-anchor="middle" opacity="1.0">455x faster</text>
+<text x="250.00" y="196.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="end" opacity="1.0">KernelExplainer</text>
+<text x="250.00" y="216.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="end" opacity="1.0">(50 samples, estimated)</text>
+<rect x="270" y="160" width="500" height="80" rx="12" ry="12" fill="#63e6be" stroke="#12b886" stroke-width="2"  opacity="1.0" />
+<text x="780.00" y="205.00" font-size="20" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="start" opacity="1.0">3.5 sec</text>
+<text x="250.00" y="326.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="end" opacity="1.0">TreeExplainer</text>
+<text x="250.00" y="346.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="end" opacity="1.0">(50 samples)</text>
+<rect x="270" y="295" width="8" height="80" rx="4" ry="4" fill="#63e6be" stroke="#12b886" stroke-width="2"  opacity="1.0" />
+<text x="290.00" y="340.00" font-size="20" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="start" opacity="1.0">8 ms</text>
+<text x="265.00" y="424.00" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#868e96" text-anchor="start" opacity="1.0">0</text>
+<text x="390.00" y="424.00" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#868e96" text-anchor="start" opacity="1.0">1000</text>
+<text x="520.00" y="424.00" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#868e96" text-anchor="start" opacity="1.0">2000</text>
+<text x="650.00" y="424.00" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#868e96" text-anchor="start" opacity="1.0">3000</text>
+<text x="475.00" y="456.00" font-size="16" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">Execution Time (ms)</text>
+<rect x="550" y="280" width="250" height="100" rx="12" ry="12" fill="#fff9db" stroke="#fab005" stroke-width="2" stroke-dasharray="10 5" opacity="1.0" />
+<text x="675.00" y="314.00" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">TreeExplainer uses</text>
+<text x="675.00" y="331.50" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">tree structure for</text>
+<text x="675.00" y="349.00" font-size="14" font-family="Virgil, Arial, sans-serif" fill="#000000" text-anchor="middle" opacity="1.0">exact O(TLD²) computation</text>
+</svg>

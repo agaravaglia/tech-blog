@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="How the agents governance framework adapts in digital-native companies with modern infrastructure, CI/CD culture, and self-service tooling." />
+  <title>Brainstorming about AI agents governance (Part 2/3): The digital-native enterprise — Alessandro Garavaglia</title>
+  <link rel="stylesheet" href="../../assets/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
+</head>
+<body class="article-page">
+
+  <nav class="site-nav">
+    <div class="container">
+      <div class="site-nav-inner">
+        <a href="../../" class="site-nav-logo">Alessandro Garavaglia<span class="site-nav-dot"> · </span>Tech Blog</a>
+        <div class="site-nav-links">
+          <a href="https://github.com/agaravaglia" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://medium.com/@ale.garavaglia" target="_blank" rel="noopener">Medium</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="article-header">
+    <div class="container">
+      <a class="back-link" href="../../">← All articles</a>
+      <div class="article-meta">
+        <span class="badge badge-type">Framework</span>
+        <span class="badge badge-difficulty">Intermediate</span>
+        <time>October 08, 2025</time>
+      </div>
+    </div>
+  </header>
+
+  <main class="article-content container">
+    <div class="article-title-block">
+      <h1>Brainstorming about AI agents governance (Part 2/3): The digital-native enterprise</h1>
+      <p class="article-description">How the agents governance framework adapts in digital-native companies with modern infrastructure, CI/CD culture, and self-service tooling.</p>
+    </div>
+    <p><strong>Alessandro Garavaglia</strong> | 6 min read | Oct 8, 2025</p>
+<hr />
+<p>In Part 1, I introduced a governance framework for AI agents based on three key pillars (Governance, Execution, and Supervision), with responsibilities spanning Strategy, Operations, and Technology. If you haven't read Part 1, I recommend starting here to understand the foundational concepts.</p>
+<p>In this post, I will explore how this framework plays out in a <strong>digital-native enterprise</strong>, where modern infrastructure, unified data platforms, and developer-first cultures are already in place. The tech stack may be modern, but that doesn't mean governance is solved.</p>
+<h3>The digital-native context: fast, code-first, and data-rich</h3>
+<p>Digital-native companies operate in environments built for speed and automation. They typically have:</p>
+<ul>
+<li><strong>Modern data infrastructure</strong> with metadata, lineage, and classification built-in;</li>
+<li><strong>Unified governance</strong> across data, ML models, and analytics;</li>
+<li><strong>Developer-centric workflows</strong>, built around a deployment platform based on infrastructure-as-code, APIs, microservices, and CI/CD;</li>
+<li>High expectations for <strong>automation</strong>, with fast, flexible, self-service tooling.</li>
+</ul>
+<p>This context can be a dream for many developers, but it brings its own challenges. Some up-front decisions can help steer the planning of AI agent governance:</p>
+<ul>
+<li><strong>Leverage existing tools and processes</strong> from the deployment platform, reusing components and best practices (like tracing and monitoring tools, container approach, automated CI/CD);</li>
+<li><strong>Most agents will be internal-first</strong>, deployed within the company's infrastructure. External agents are used only when necessary.</li>
+</ul>
+<p>Let's look at how the framework adapts in this context.</p>
+<p><img alt="Governance framework adapted for digital-native enterprises" src="additional_files/images/image-01.png" /></p>
+<h3>Governance</h3>
+<h4>Agent registration and approval-as-code</h4>
+<p>The agent manifest, in the form of a structured YAML or JSON file, is embedded into the codebase and CI/CD pipeline. As explained in Part 1, it should contain:</p>
+<ul>
+<li>The agent name, version, and purpose;</li>
+<li>Tools and APIs it can access;</li>
+<li>Risk classification;</li>
+<li>Resource limits and deployment environment.</li>
+</ul>
+<p>Agent creation follows Git-based workflows:</p>
+<ul>
+<li>Developers submit a <strong>merge request</strong> with the agent manifest;</li>
+<li>Bots run <strong>checks</strong> on compliance, scope, and risk;</li>
+<li>For higher-risk agents, <strong>reviewers from the AI Governance Board</strong> are looped in.</li>
+</ul>
+<p>Risk assessment doesn't need to be manual. Instead:</p>
+<ul>
+<li>Use <strong>policy-as-code tools</strong> (like OPA, Rego, or custom linters);</li>
+<li>Automatically score risk based on the agent's capabilities and access levels;</li>
+<li>Define thresholds for <strong>auto-approval or escalation</strong>.</li>
+</ul>
+<p>This way, low-risk agents fly through, while high-risk ones get the scrutiny they need.</p>
+<h4>Integration with Metadata &amp; Lineage Systems</h4>
+<p>Agent manifests can refer to existing assets in the enterprise:</p>
+<ul>
+<li>Data sources in the catalog;</li>
+<li>Models in the ML registry;</li>
+<li>Datasets classified as sensitive or regulated.</li>
+</ul>
+<p>Since the enterprise is already aligned on a modern data stack, there is no need for reinvention, just tight integration with what's already there.</p>
+<h4>Ethics and bias checks</h4>
+<p>Even in fast-moving digital-native companies, bias and ethical risks cannot be ignored. The AI Governance Board should be responsible for:</p>
+<ul>
+<li><strong>Enforcing bias evaluations</strong> for agents interacting with customer data or making impactful decisions;</li>
+<li><strong>Reviewing potential ethical consequences</strong> of autonomous decisions, especially around fairness and inclusivity;</li>
+<li><strong>Requiring documentation</strong> for risk mitigations in the manifest (prompt reviews, fallback mechanisms, …).</li>
+</ul>
+<p>These checks can be built into CI/CD via linting rules or enforced during approval steps.</p>
+<h4>Composition of the AI Governance Board</h4>
+<p>In digital-native settings, the AI Board can be lightweight but cross-functional. Suggestions for composition include:</p>
+<ul>
+<li>A technical lead or architect (e.g., platform or ML team);</li>
+<li>A security and privacy representative;</li>
+<li>A legal representative;</li>
+<li>A product or business stakeholder;</li>
+<li>Optional: a rotating "ethics" reviewer for high-risk agents.</li>
+</ul>
+<p>This encourages governance without creating bureaucracy.</p>
+<h3>Execution</h3>
+<p>This is where digital-native companies have the biggest advantage. The infrastructure is already there: containers, CI/CD, secrets management, IAM. Agent execution just needs to plug in.</p>
+<h4>Self-service AI Agent platform-as-a-service (PaaS)</h4>
+<p>With few lightweight components modelled as microservices, the internal platform can manage the agent lifecycle:</p>
+<ul>
+<li><strong>Accepts</strong> manifests, <strong>validates</strong> them, and <strong>deploys</strong> agents automatically;</li>
+<li><strong>Injects</strong> secrets, config, and environment variables;</li>
+<li>Routes access via IAM roles or scoped credentials;</li>
+<li>Provides a UI for exploring existing agents and requesting new ones.</li>
+</ul>
+<p>The <strong>UI can also be exposed to non-technical business users</strong> who are responsible for monitoring the logic implemented by the agent. Requesting a new agent via the UI should trigger a merge request (as described above) to maintain consistency.</p>
+<h4>Internal-first deployment</h4>
+<p>Since the application landscape is modern and based on containers or microservices, <strong>AI agents are deployed inside internal infrastructure by default</strong>, similar to other microservices:</p>
+<ul>
+<li>As containers on machines (VMs, Kubernetes, etc.);</li>
+<li>As serverless apps (AWS Lambda, Cloud Functions, etc.);</li>
+<li>As APIs served from internal endpoints.</li>
+</ul>
+<p>External agent platforms are used only when necessary, and they follow the same governance checks. In such cases, custom code can deploy agents to third-party platforms via APIs.</p>
+<h4>Pre-built connectors</h4>
+<p>Avoid reinventing the wheel. The platform provides:</p>
+<ul>
+<li><strong>Secure, pre-approved connectors for third-party tools</strong> (Salesforce, Snowflake, Slack, Databricks, …);</li>
+<li><strong>Proxy interfaces or Model Context Protocol servers (MCPs)</strong> to standardize how agents interact with internal systems;</li>
+<li><strong>Shared</strong> logging, secrets, and CI/CD infrastructure.</li>
+</ul>
+<p>The platform treats these services like any other applications within the enterprise, encouraging reuse of standards and best practices.</p>
+<h3>Supervision</h3>
+<p>Just because the systems are fast doesn't mean you can skip supervision. On the contrary, the more autonomous your agents, the more observability you need.</p>
+<h4>FinOps &amp; business guidelines for agents</h4>
+<p>Digital-native teams apply FinOps principles, as for the rest of their cloud infrastructure:</p>
+<ul>
+<li>Set <strong>budgets</strong> per team or agent;</li>
+<li><strong>Track cost per call, per tool, per model</strong>;</li>
+<li><strong>Trigger alerts</strong> or throttling when usage spikes.</li>
+</ul>
+<p>In addition to FinOps, business stakeholders should review agent usage and logic regularly, ensuring <strong>alignment with business goals and avoiding scope creep</strong>. In flatter hierarchies like digital natives enterprises, this supervision can be lighter, but still necessary.</p>
+<h4>Observability by default</h4>
+<p>Both the budget guidelines and business KPIs require real-time monitoring. As with deployment, it's best to reuse existing observability infrastructure:</p>
+<ul>
+<li><strong>Structured logging</strong> with context: agent ID, prompt, tool usage;</li>
+<li><strong>Prompt tracing</strong> and <strong>chain-of-thought</strong> logs;</li>
+<li><strong>Metrics:</strong> latency, retries, LLM token usage, cost;</li>
+<li><strong>Dashboards</strong> to monitor agent health in real time.</li>
+</ul>
+<p>This ensures integration between agentic logs and the rest of the enterprise applications.</p>
+<h4>Audit and compliance</h4>
+<p>With manifests and logs in place, compliance doesn't mean slowing down:</p>
+<ul>
+<li>Every agent action is timestamped and logged;</li>
+<li>Agent decisions can be replayed and explained;</li>
+<li>Internal auditors and business teams can trace back decisions easily.</li>
+</ul>
+<p>This supports both technical transparency and regulatory accountability.</p>
+<h3>Best practices and patterns</h3>
+<h4>Best Practices</h4>
+<ul>
+<li><strong>Treat manifests like config:</strong> validate them with CI/CD and policy-as-code tools;</li>
+<li><strong>Auto-approve low-risk agents:</strong> use risk scoring to scale approvals;</li>
+<li><strong>Build and maintain tool connectors:</strong> share across teams to reduce duplication;</li>
+<li><strong>Use data lineage for access scoping:</strong> automate permissions based on datasets;</li>
+<li><strong>Monitor cost and behavior centrally:</strong> build dashboards, alerts, and usage reports.</li>
+</ul>
+<h4>Watchouts</h4>
+<ul>
+<li><strong>Prompt deterioration:</strong> without structure, agents become fragile and hard to debug;</li>
+<li><strong>Agent sprawl:</strong> if everyone builds their own version of the same agent, it will be chaos. The agent catalog needs to be visible and explorable by everyone;</li>
+<li><strong>Platform fragmentation:</strong> even with a great stack, inconsistent usage patterns can derail governance.</li>
+</ul>
+<h3>Conclusion</h3>
+<p>Modern infrastructure simplifies a lot, but it doesn't remove the need for governance. In digital-native companies, the real challenge isn't building the platform, but it is embedding governance into fast-moving, developer-driven workflows.</p>
+<p>Ethical risks, compliance, and business alignment must still be considered, even in a tech-forward environment.</p>
+<p>In Part 3 of this series, I will explore what happens in the opposite situation: a legacy-heavy and highly regulated enterprise.</p>
+<p>Thanks for reading!</p>
+<hr />
+<p><em>This post is not meant to provide definitive answers or prescriptive guidance. Its goal is to spark reflections and discussions on the topic.</em></p>
+<p><em>The views expressed are my own.</em></p>
+<hr />
+<p><strong>Tags:</strong> AI, Innovation, Technology, AI Agent</p>
+  </main>
+
+  <footer class="article-footer">
+    <div class="container">
+      <div class="article-footer-inner">
+        <div class="article-footer-tags">
+          <span class="label">Tags</span>
+          <span class="tag-static">AI</span> <span class="tag-static">AI Agent</span> <span class="tag-static">AI Governance</span> <span class="tag-static">Enterprise Technology</span> <span class="tag-static">Digital Transformation</span>
+        </div>
+        <a class="back-link" href="../../">← All articles</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+</body>
+</html>
